@@ -1,0 +1,17 @@
+version: '2'
+services:
+    depillagos-mongodb:
+        container_name: depillagos-mongodb
+        image: mongo:3.2.10
+        ports:
+            - "27017:27017"
+        command: mongos --configdb depillagos-mongodb-config
+    depillagos-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    depillagos-mongodb-config:
+        image: mongo:3.2.10
+        container_name: depillagos-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db

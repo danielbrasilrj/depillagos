@@ -1,0 +1,5 @@
+{
+    "directory": "src/main/webapp/bower_components",
+	"proxy":"http://daniel.carmo:Lucien3@proxy.pgj.rj.gov.br:3128", 
+	"https-proxy":"http://daniel.carmo:Lucien3@proxy.pgj.rj.gov.br:3128"
+}
