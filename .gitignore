@@ -1,0 +1,18 @@
+# Subprojetos com repo próprio
+depillagos_notas_fiscais/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Claude Code
+.claude/
+.playwright-mcp/
+
+# Secrets
+.env
+*.pfx
+*.pem
