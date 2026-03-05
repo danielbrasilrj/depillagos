@@ -52,6 +52,9 @@ Script Python que puxa NFS-e da API nacional, identifica notas com rateio de par
 ### Contrato de locação — Araruama (`contrato_locacao/`)
 Análise jurídica e contraproposta do contrato de locação do imóvel da matriz. Detalhes em `contrato_locacao/CLAUDE.md`.
 
+### Controle financeiro (`controle_financeiro/`, neste repo)
+Análise e cruzamento do quadro financeiro mensal (Miro) com dados do Trinks e Avec. Fontes: API Trinks (`/v1/lancamentos`) para despesas/comissões e relatório Avec para comissões de parceiras MEI (manicure, cabeleireiras). Corte semanal aos sábados.
+
 ### Tráfego pago (`trafego_pago/`, neste repo)
 Ainda sem implementação.
 
