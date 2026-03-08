@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depillagos — Reorganização Tributária</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #9ca3af;
+    --accent: #a78bfa;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --blue: #60a5fa;
+    --pink: #f472b6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent); }
+  h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; }
+  .section { margin-bottom: 3rem; }
+
+  /* Grid layouts */
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .stat-card .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-card .value { font-size: 1.8rem; font-weight: 700; margin: 0.25rem 0; }
+  .stat-card .sub { font-size: 0.85rem; color: var(--muted); }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-green { background: rgba(52,211,153,0.15); color: var(--green); }
+  .badge-red { background: rgba(248,113,113,0.15); color: var(--red); }
+  .badge-yellow { background: rgba(251,191,36,0.15); color: var(--yellow); }
+  .badge-blue { background: rgba(96,165,250,0.15); color: var(--blue); }
+  .badge-accent { background: rgba(167,139,250,0.15); color: var(--accent); }
+
+  /* Flow diagram */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  .flow-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    min-width: 140px;
+  }
+  .flow-box .amount { font-size: 1.2rem; font-weight: 700; }
+  .flow-box .desc { font-size: 0.8rem; color: var(--muted); }
+  .flow-arrow { color: var(--muted); font-size: 1.4rem; }
+  .flow-box.highlight { border-color: var(--accent); background: rgba(167,139,250,0.08); }
+  .flow-box.danger { border-color: var(--red); background: rgba(248,113,113,0.05); }
+  .flow-box.success { border-color: var(--green); background: rgba(52,211,153,0.05); }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  td { font-size: 0.95rem; }
+  tr:last-child td { border-bottom: none; }
+
+  /* Comparison */
+  .compare-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  .compare-header { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600; }
+
+  /* Progress bars */
+  .bar-container { margin: 0.5rem 0; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem; }
+  .bar-track { background: var(--border); border-radius: 100px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 100px; transition: width 0.3s; }
+
+  /* Steps */
+  .step {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(167,139,250,0.15);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-title { font-weight: 600; margin-bottom: 0.15rem; }
+  .step-desc { font-size: 0.85rem; color: var(--muted); }
+
+  /* Alert */
+  .alert {
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .alert-red { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); }
+  .alert-green { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); }
+  .alert-yellow { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); }
+  .alert-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .alert-text { font-size: 0.9rem; }
+  .alert-text strong { display: block; margin-bottom: 0.25rem; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .tag { display: inline-block; margin: 0.15rem; }
+  .mono { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-yellow { color: var(--yellow); }
+  .text-muted { color: var(--muted); }
+  .text-accent { color: var(--accent); }
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+  .font-bold { font-weight: 700; }
+  .mt-1 { margin-top: 0.5rem; }
+  .mb-1 { margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="section">
+  <h1>Depillagos — Reorganização Tributária</h1>
+  <p class="subtitle">Diagnóstico fiscal com dados reais do Trinks | Fevereiro 2026</p>
+</div>
+
+<!-- PANORAMA ATUAL -->
+<div class="section">
+  <h2>1. Panorama Atual</h2>
+  <div class="grid-4">
+    <div class="stat-card">
+      <div class="label">Atendimentos/mês</div>
+      <div class="value">2.027</div>
+      <div class="sub">Fev/2026 (Trinks)</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Impostos/mês</div>
+      <div class="value text-red">R$ 11.420</div>
+      <div class="sub">Simples + INSS + FGTS + ISS</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Comissões MEI/mês</div>
+      <div class="value text-accent">R$ 30.000</div>
+      <div class="sub">~50% do faturamento parceiros</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Folha CLT/mês</div>
+      <div class="value">R$ 14.169</div>
+      <div class="sub">8 funcionários + encargos</div>
+    </div>
+  </div>
+</div>
+
+<!-- ESTRUTURA DA EQUIPE -->
+<div class="section">
+  <h2>2. Estrutura da Equipe</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>CLT (8 profissionais) <span class="badge badge-blue">Empresa paga encargos</span></h3>
+      <table>
+        <tr><td>Ana Carolina, Daiane, Patricia, Yasmin M.</td><td class="text-right text-muted">Depiladoras</td></tr>
+        <tr><td>Yasmin Recepção, Simone</td><td class="text-right text-muted">Recepção</td></tr>
+        <tr><td>Caroline</td><td class="text-right text-muted">Esteticista</td></tr>
+        <tr><td>Renata</td><td class="text-right text-muted">Limpeza</td></tr>
+      </table>
+      <p class="mt-1 text-muted" style="font-size:0.85rem">Salários: R$ 14.169/mês | FGTS: R$ 1.045 | INSS: R$ 1.129</p>
+    </div>
+    <div class="card">
+      <h3>MEI Parceiras (12+) <span class="badge badge-accent">Rateio 50/50</span></h3>
+      <table>
+        <tr><td>Jhennifer, Dalleti, Itaciana, Camila, Jari, Washilla, Monica, Isabella, Josiane, Thays</td><td class="text-right text-muted">Manicure</td></tr>
+        <tr><td>Jessica, Tauanny, Jacqueline</td><td class="text-right text-muted">Cabeleireiras</td></tr>
+      </table>
+      <p class="mt-1 text-muted" style="font-size:0.85rem">Comissões Trinks Fev: R$ 20.374 (+ Avec ~R$ 10K)</p>
+    </div>
+  </div>
+</div>
+
+<!-- FLUXO FINANCEIRO ATUAL -->
+<div class="section">
+  <h2>3. Fluxo Financeiro Atual</h2>
+  <div class="card">
+    <h3>Como o dinheiro flui hoje</h3>
+    <div class="flow">
+      <div class="flow-box">
+        <div class="amount">R$ 100</div>
+        <div class="desc">Cliente paga</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box highlight">
+        <div class="amount">Maquininha</div>
+        <div class="desc">Depillagos recebe tudo</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box">
+        <div class="amount">NFS-e R$ 100</div>
+        <div class="desc">Nota fiscal emitida</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box success">
+        <div class="amount">- Cota parte</div>
+        <div class="desc">Deduz 50% do parceiro</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box">
+        <div class="amount">R$ 50</div>
+        <div class="desc">Base do Simples</div>
+      </div>
+    </div>
+    <div class="alert alert-green" style="margin-top:1rem">
+      <div class="alert-icon">&#10003;</div>
+      <div class="alert-text">
+        <strong>Boa notícia: vocês já fazem certo o básico</strong>
+        A cota parte está sendo deduzida da NFS-e. Isso significa que a Depillagos <strong>não paga imposto dobrado</strong> sobre o repasse das parceiras. A Lei do Salão-Parceiro (13.352/2016) está sendo aplicada.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPOSIÇÃO DOS IMPOSTOS -->
+<div class="section">
+  <h2>4. Composição dos Impostos — Fev/2026</h2>
+  <div class="card">
+    <div class="bar-container">
+      <div class="bar-label"><span>Simples Nacional</span><span class="font-bold">R$ 7.715</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:67.6%;background:var(--red)"></div></div>
+    </div>
+    <div class="bar-container">
+      <div class="bar-label"><span>INSS Previdenciário</span><span class="font-bold">R$ 1.129</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:9.9%;background:var(--yellow)"></div></div>
+    </div>
+    <div class="bar-container">
+      <div class="bar-label"><span>FGTS</span><span class="font-bold">R$ 1.045</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:9.2%;background:var(--yellow)"></div></div>
+    </div>
+    <div class="bar-container">
+      <div class="bar-label"><span>MEI Luciene (parcelado + corrente)</span><span class="font-bold">R$ 859</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:7.5%;background:var(--blue)"></div></div>
+    </div>
+    <div class="bar-container">
+      <div class="bar-label"><span>Simples Nacional (parcelado)</span><span class="font-bold">R$ 359</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:3.1%;background:var(--red)"></div></div>
+    </div>
+    <div class="bar-container">
+      <div class="bar-label"><span>Taxa Publicidade + ISS + MEI Ana</span><span class="font-bold">R$ 313</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:2.7%;background:var(--muted)"></div></div>
+    </div>
+    <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); display:flex; justify-content:space-between;">
+      <span class="font-bold" style="font-size:1.1rem">Total Impostos</span>
+      <span class="font-bold text-red" style="font-size:1.1rem">R$ 11.420/mês</span>
+    </div>
+    <p class="text-muted mt-1" style="font-size:0.85rem">= R$ 137.040/ano | O Simples Nacional sozinho representa 68% da carga</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ALERTAS E PROBLEMAS -->
+<div class="section">
+  <h2>5. Problemas Identificados</h2>
+
+  <div class="alert alert-red">
+    <div class="alert-icon">&#9888;</div>
+    <div class="alert-text">
+      <strong>Esteticista Laser — Risco Trabalhista Alto</strong>
+      A esteticista do laser é MEI mas recebe remuneração fixa de R$ 2.300/mês. Se há subordinação, habitualidade e pessoalidade, isso configura vínculo empregatício disfarçado. Em uma ação trabalhista, o salão pode ser condenado a pagar todos os encargos retroativos (FGTS, 13o, férias, INSS).
+    </div>
+  </div>
+
+  <div class="alert alert-yellow">
+    <div class="alert-icon">&#9888;</div>
+    <div class="alert-text">
+      <strong>Contratos de Parceria — Fragilidade Jurídica</strong>
+      Para a Lei 13.352 proteger o salão, é obrigatório ter contrato formal de parceria com cada MEI. Sem contrato, o modelo fica vulnerável a ações trabalhistas e questionamentos da Receita Federal. Cada parceira precisa de CNPJ MEI ativo e emitir nota da sua parte.
+    </div>
+  </div>
+
+  <div class="alert alert-yellow">
+    <div class="alert-icon">&#128200;</div>
+    <div class="alert-text">
+      <strong>Aluguel de R$ 10.843/mês — Maior Despesa Fixa</strong>
+      O aluguel de Araruama consome uma fatia enorme do faturamento. Em um modelo de holding, parte desse valor poderia ser pago a uma empresa própria do Daniel, redirecionando o custo para uma pessoa jurídica com tributação menor.
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- MODELOS DE REORGANIZAÇÃO -->
+<div class="section">
+  <h2>6. Modelos de Reorganização</h2>
+
+  <!-- Cenário A -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <h3 style="margin:0">Cenário A — Salão-Parceiro Otimizado</h3>
+      <span class="badge badge-green">Menor mudança</span>
+    </div>
+    <p style="font-size:0.9rem; margin-bottom:1rem;">Manter o modelo atual mas garantir 100% de conformidade legal. Formalizar contratos, garantir que cada MEI emita nota, revisar a situação da esteticista laser.</p>
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="label">O que muda</div>
+        <div class="value" style="font-size:1.2rem">Contratos + NFS-e MEI</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Economia estimada</div>
+        <div class="value text-green" style="font-size:1.2rem">R$ 500-1.000/mês</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Risco</div>
+        <div class="value text-green" style="font-size:1.2rem">Baixo</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Prazo</div>
+        <div class="value" style="font-size:1.2rem">1-2 meses</div>
+      </div>
+    </div>
+    <p class="text-muted" style="font-size:0.85rem">
+      <strong>Ações:</strong> Formalizar contratos de parceria | Garantir emissão de NFS-e por cada MEI | Resolver situação da esteticista laser (registrar CLT ou dar autonomia real) | Revisar CNAE
+    </p>
+  </div>
+
+  <!-- Cenário B -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <h3 style="margin:0">Cenário B — Coworking Estético</h3>
+      <span class="badge badge-yellow">Mudança média</span>
+    </div>
+    <p style="font-size:0.9rem; margin-bottom:1rem;">Profissionais pagam taxa fixa de uso do espaço. O salão fatura sobre a taxa, não sobre o serviço todo. A profissional cobra direto do cliente ou o salão intermedia e repassa.</p>
+
+    <div class="card" style="background:var(--bg); margin-bottom:1rem;">
+      <h3 style="font-size:0.9rem; color:var(--muted)">EXEMPLO: Manicure faz R$ 65 (pé e mão)</h3>
+      <div class="flow">
+        <div class="flow-box">
+          <div class="amount">R$ 65</div>
+          <div class="desc">Cliente paga</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box danger">
+          <div class="amount text-red">Modelo atual</div>
+          <div class="desc">Depillagos fatura R$ 65<br>Imposto sobre R$ 32,50</div>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="flow-box">
+          <div class="amount">R$ 65</div>
+          <div class="desc">Cliente paga</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box success">
+          <div class="amount text-green">Coworking</div>
+          <div class="desc">Depillagos fatura R$ 20<br>Imposto sobre R$ 20</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="label">O que muda</div>
+        <div class="value" style="font-size:1.2rem">Fluxo de pagamento</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Economia estimada</div>
+        <div class="value text-green" style="font-size:1.2rem">R$ 2.000-3.500/mês</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Risco</div>
+        <div class="value text-yellow" style="font-size:1.2rem">Médio</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Prazo</div>
+        <div class="value" style="font-size:1.2rem">3-4 meses</div>
+      </div>
+    </div>
+    <p class="text-muted" style="font-size:0.85rem">
+      <strong>Risco:</strong> Perda parcial de controle sobre o fluxo financeiro. A profissional pode querer autonomia demais. Precisa de contrato de locação de espaço bem redigido.
+    </p>
+  </div>
+
+  <!-- Cenário C -->
+  <div class="card" style="margin-bottom:1.5rem; border-color: var(--accent);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <h3 style="margin:0">Cenário C — Modelo Híbrido <span class="text-accent">(Recomendado)</span></h3>
+      <span class="badge badge-accent">Melhor custo-benefício</span>
+    </div>
+    <p style="font-size:0.9rem; margin-bottom:1rem;">Combina Salão-Parceiro para depilação (CLT) com aluguel de espaço/cadeira para manicures e cabeleireiras. Cada categoria de profissional no modelo mais vantajoso.</p>
+
+    <div class="card" style="background:var(--bg); margin-bottom:1rem;">
+      <table>
+        <thead>
+          <tr>
+            <th>Setor</th>
+            <th>Modelo</th>
+            <th>Como funciona</th>
+            <th class="text-right">Faturamento Depillagos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Depilação (cera + laser)</strong></td>
+            <td><span class="badge badge-blue">CLT + Próprio</span></td>
+            <td>Mantém como está. Serviço próprio.</td>
+            <td class="text-right">100% do valor</td>
+          </tr>
+          <tr>
+            <td><strong>Manicure/Pedicure</strong></td>
+            <td><span class="badge badge-accent">Taxa de uso</span></td>
+            <td>MEI paga taxa fixa/cadeira ou % do uso</td>
+            <td class="text-right">~30% (taxa)</td>
+          </tr>
+          <tr>
+            <td><strong>Cabeleireiro</strong></td>
+            <td><span class="badge badge-accent">Taxa de uso</span></td>
+            <td>MEI paga taxa fixa pela sala</td>
+            <td class="text-right">~30% (taxa)</td>
+          </tr>
+          <tr>
+            <td><strong>Estética</strong></td>
+            <td><span class="badge badge-green">Parceiro formal</span></td>
+            <td>Contrato de parceria Lei 13.352</td>
+            <td class="text-right">50% (cota parte)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="label">O que muda</div>
+        <div class="value" style="font-size:1.2rem">Modelo por setor</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Economia estimada</div>
+        <div class="value text-green" style="font-size:1.2rem">R$ 2.500-4.000/mês</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Risco</div>
+        <div class="value text-yellow" style="font-size:1.2rem">Médio-Baixo</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Prazo</div>
+        <div class="value" style="font-size:1.2rem">3-6 meses</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cenário D -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <h3 style="margin:0">Cenário D — Holding (2 empresas)</h3>
+      <span class="badge badge-red">Maior complexidade</span>
+    </div>
+    <p style="font-size:0.9rem; margin-bottom:1rem;">Criar uma segunda empresa para receber aluguel, taxa de estrutura e licenciamento da marca. Divide o faturamento entre dois CNPJs com alíquotas menores.</p>
+
+    <div class="card" style="background:var(--bg); margin-bottom:1rem;">
+      <div class="flow">
+        <div class="flow-box">
+          <div class="amount">R$ 100</div>
+          <div class="desc">Cliente paga</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box highlight">
+          <div class="amount">R$ 50</div>
+          <div class="desc">Empresa 1<br><small>Operacional (serviços)</small></div>
+        </div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-box" style="border-color:var(--pink)">
+          <div class="amount">R$ 30</div>
+          <div class="desc">Empresa 2<br><small>Estrutura / marca</small></div>
+        </div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-box success">
+          <div class="amount">R$ 20</div>
+          <div class="desc">Aluguel<br><small>Pode ser PF ou PJ</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="label">Economia estimada</div>
+        <div class="value text-green" style="font-size:1.2rem">R$ 3.000-4.500/mês</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Custo extra</div>
+        <div class="value text-yellow" style="font-size:1.2rem">~R$ 700/mês</div>
+        <div class="sub">2o contador + taxas</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Risco</div>
+        <div class="value text-red" style="font-size:1.2rem">Alto</div>
+        <div class="sub">Receita pode questionar</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Prazo</div>
+        <div class="value" style="font-size:1.2rem">6-12 meses</div>
+      </div>
+    </div>
+    <p class="text-muted" style="font-size:0.85rem">
+      <strong>Atenção:</strong> Se a Receita Federal entender que a divisão é artificial (sem propósito negocial real), pode autuar por planejamento tributário abusivo. Exige advogado tributarista.
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- MATRIZ DE DECISÃO -->
+<div class="section">
+  <h2>7. Matriz de Comparação</h2>
+  <div class="card" style="overflow-x:auto">
+    <div class="compare-row compare-header">
+      <div>Critério</div>
+      <div class="text-center">A - Otimizar</div>
+      <div class="text-center">B - Coworking</div>
+      <div class="text-center">C - Híbrido</div>
+      <div class="text-center">D - Holding</div>
+    </div>
+    <div class="compare-row">
+      <div>Economia/mês</div>
+      <div class="text-center">R$ 500-1K</div>
+      <div class="text-center">R$ 2-3,5K</div>
+      <div class="text-center font-bold text-green">R$ 2,5-4K</div>
+      <div class="text-center">R$ 3-4,5K</div>
+    </div>
+    <div class="compare-row">
+      <div>Economia/ano</div>
+      <div class="text-center">R$ 6-12K</div>
+      <div class="text-center">R$ 24-42K</div>
+      <div class="text-center font-bold text-green">R$ 30-48K</div>
+      <div class="text-center">R$ 36-54K</div>
+    </div>
+    <div class="compare-row">
+      <div>Complexidade</div>
+      <div class="text-center"><span class="badge badge-green">Baixa</span></div>
+      <div class="text-center"><span class="badge badge-yellow">Média</span></div>
+      <div class="text-center"><span class="badge badge-yellow">Média</span></div>
+      <div class="text-center"><span class="badge badge-red">Alta</span></div>
+    </div>
+    <div class="compare-row">
+      <div>Risco Trabalhista</div>
+      <div class="text-center"><span class="badge badge-green">Baixo</span></div>
+      <div class="text-center"><span class="badge badge-yellow">Médio</span></div>
+      <div class="text-center"><span class="badge badge-green">Baixo</span></div>
+      <div class="text-center"><span class="badge badge-green">Baixo</span></div>
+    </div>
+    <div class="compare-row">
+      <div>Risco Fiscal</div>
+      <div class="text-center"><span class="badge badge-green">Nenhum</span></div>
+      <div class="text-center"><span class="badge badge-green">Baixo</span></div>
+      <div class="text-center"><span class="badge badge-green">Baixo</span></div>
+      <div class="text-center"><span class="badge badge-red">Alto</span></div>
+    </div>
+    <div class="compare-row">
+      <div>Controle da agenda</div>
+      <div class="text-center">&#10003; Total</div>
+      <div class="text-center">&#9888; Parcial</div>
+      <div class="text-center">&#10003; Total</div>
+      <div class="text-center">&#10003; Total</div>
+    </div>
+    <div class="compare-row">
+      <div>Precisa de advogado?</div>
+      <div class="text-center">Só contratos</div>
+      <div class="text-center">Sim</div>
+      <div class="text-center">Sim</div>
+      <div class="text-center">Obrigatório</div>
+    </div>
+    <div class="compare-row" style="background:rgba(167,139,250,0.05)">
+      <div class="font-bold">Recomendação</div>
+      <div class="text-center">Fazer já</div>
+      <div class="text-center text-muted">Avaliar</div>
+      <div class="text-center font-bold text-accent">&#9733; Melhor opção</div>
+      <div class="text-center text-muted">Futuro</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PLANO DE IMPLEMENTAÇÃO -->
+<div class="section">
+  <h2>8. Plano de Implementação</h2>
+  <p class="text-muted mb-1" style="font-size:0.9rem">Recomendação: começar pelo Cenário A (imediato) e migrar para o C (3-6 meses)</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Fase 1 — Conformidade Imediata <span class="badge badge-green">Meses 1-2</span></h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Formalizar contratos de parceria</div>
+        <div class="step-desc">Contrato individual com cada MEI (manicures, cabeleireiras, estética). Modelo da Lei 13.352/2016.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Resolver situação da esteticista laser</div>
+        <div class="step-desc">Opção A: Registrar CLT (mais seguro). Opção B: Dar autonomia real — ela define horários, atende outros locais, emite nota própria (sem remuneração fixa).</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Garantir emissão de NFS-e por cada MEI</div>
+        <div class="step-desc">Cada parceira precisa emitir nota fiscal da sua cota parte. Isso reforça a separação legal.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Revisar CNAE com contador</div>
+        <div class="step-desc">Verificar se os CNAEs atuais são os mais vantajosos para o Simples Nacional. Considerar CNAE de locação de espaço se migrar para coworking.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Fase 2 — Modelo Híbrido <span class="badge badge-accent">Meses 3-6</span></h3>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Migrar manicures para taxa de uso</div>
+        <div class="step-desc">Em vez de 50/50, cada manicure paga uma taxa fixa semanal ou mensal pela cadeira + insumos. Depillagos fatura apenas a taxa.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <div class="step-title">Migrar cabeleireiras para aluguel de sala</div>
+        <div class="step-desc">Contrato de locação de espaço. Cabeleireira paga aluguel fixo ou variável pela sala de atendimento.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <div class="step-title">Ajustar fluxo no Trinks</div>
+        <div class="step-desc">Adaptar a forma de registro: receita da taxa de uso em vez de receita do serviço inteiro. Manter controle da agenda centralizado.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-content">
+        <div class="step-title">Comunicar profissionais</div>
+        <div class="step-desc">Reunião com as parceiras explicando a mudança. Para elas também pode ser vantajoso: ficam com mais autonomia e mantêm o mesmo ganho.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- O QUE NÃO MUDA -->
+<div class="section">
+  <h2>9. O que NÃO muda</h2>
+  <div class="grid-4">
+    <div class="stat-card">
+      <div class="value" style="font-size:1.5rem">&#128197;</div>
+      <div class="label" style="margin-top:0.5rem">Agenda</div>
+      <div class="sub">Trinks continua centralizando tudo</div>
+    </div>
+    <div class="stat-card">
+      <div class="value" style="font-size:1.5rem">&#128101;</div>
+      <div class="label" style="margin-top:0.5rem">Clientes</div>
+      <div class="sub">Base de 26K+ segue da Depillagos</div>
+    </div>
+    <div class="stat-card">
+      <div class="value" style="font-size:1.5rem">&#127991;</div>
+      <div class="label" style="margin-top:0.5rem">Marca</div>
+      <div class="sub">Depillagos em tudo, sempre</div>
+    </div>
+    <div class="stat-card">
+      <div class="value" style="font-size:1.5rem">&#128176;</div>
+      <div class="label" style="margin-top:0.5rem">Financeiro</div>
+      <div class="sub">Controle centralizado mantido</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PRÓXIMOS PASSOS -->
+<div class="section">
+  <h2>10. Próximos Passos</h2>
+  <div class="card">
+    <div class="step">
+      <div class="step-num" style="background:rgba(248,113,113,0.15); color:var(--red)">!</div>
+      <div class="step-content">
+        <div class="step-title">Reunião com contador</div>
+        <div class="step-desc">Levar este diagnóstico. Perguntar: (1) O DAS está sendo calculado já com dedução da cota parte? (2) Qual a faixa exata do Simples? (3) Que CNAEs temos hoje? (4) O contador conhece o modelo de locação de espaço/cadeira?</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:rgba(248,113,113,0.15); color:var(--red)">!</div>
+      <div class="step-content">
+        <div class="step-title">Consultar advogado trabalhista</div>
+        <div class="step-desc">Para: (1) Modelo de contrato de parceria (Lei 13.352). (2) Contrato de locação de espaço/cadeira. (3) Regularizar situação da esteticista laser.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Levantar dados complementares</div>
+        <div class="step-desc">Relatório Avec completo para ter a foto real das comissões de manicure e cabelo. Verificar DAS dos últimos 12 meses para calcular economia com mais precisão.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; padding:2rem 0; color:var(--muted); font-size:0.8rem;">
+  Depillagos &mdash; Estudo de Reorganização Tributária &mdash; Março 2026<br>
+  <span style="font-size:0.75rem">Este documento é um estudo preliminar. Toda implementação deve ser validada por contador e advogado.</span>
+</div>
+
+</body>
+</html>
