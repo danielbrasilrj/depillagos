@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://depillagos.com.br/sitemap.xml

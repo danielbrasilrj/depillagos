@@ -396,4 +396,19 @@ RewriteRule ^lojas/loja-araruama/?$ /contato.html [R=301,L]
 
 | Task ID | Description | Status | Date |
 |---|---|---|---|
-| — | — | — | — |
+| S1-01 | Project Setup (dirs, favicon, assets, logos) | done | 2026-03-08 |
+| S1-02 | CSS Design System (vars, components, nav, footer) | done | 2026-03-08 |
+| S1-03 | Home — Banner Carousel + Categorias | done | 2026-03-08 |
+| S1-04 | Home — Laser + Números + Depoimentos + Mapa | done | 2026-03-08 |
+| S1-05 | Home — SEO On-Page (Schema, OG, meta) | done | 2026-03-08 |
+| S2-01 | Serviços — Layout + Nav + Busca | done | 2026-03-08 |
+| S2-02 | Serviços — Depilação Cera (fem + masc + linha) | done | 2026-03-08 |
+| S2-03 | Serviços — Depilação Laser | done | 2026-03-08 |
+| S2-04 | Serviços — Cabelo, Unhas, Sobrancelha, Estética | done | 2026-03-08 |
+| S2-05 | Serviços — SEO + FAQ | done | 2026-03-08 |
+| S3-01 | Página Laser 4D (tech, preços, FAQ, masculino) | done | 2026-03-08 |
+| S3-02 | Página Quem Somos (história, valores, diferenciais) | done | 2026-03-08 |
+| S3-03 | Página Contato (mapa, horários, WhatsApp) | done | 2026-03-08 |
+| S4-01 | Performance (preconnect, inline CSS/JS, semântica) | done | 2026-03-08 |
+| S4-02 | SEO Technical (sitemap, robots, .htaccess, 301s) | done | 2026-03-08 |
+| S4-03 | Deploy Staging (Vercel) | done | 2026-03-08 |

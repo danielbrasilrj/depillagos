@@ -1,0 +1,56 @@
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect www to non-www
+RewriteCond %{HTTP_HOST} ^www\.depillagos\.com\.br [NC]
+RewriteRule ^(.*)$ https://depillagos.com.br/$1 [L,R=301]
+
+# WordPress URLs → novo site
+RewriteRule ^servicos/?$ /servicos.html [R=301,L]
+RewriteRule ^depilacao-a-laser/?$ /depilacao-a-laser.html [R=301,L]
+RewriteRule ^quem-somos/?$ /quem-somos.html [R=301,L]
+RewriteRule ^fale-conosco/?$ /contato.html [R=301,L]
+RewriteRule ^contato/?$ /contato.html [R=301,L]
+
+# Blog redirects
+RewriteRule ^blog/como-a-depilacao-a-laser-pode-ajudar/?$ /depilacao-a-laser.html#faq [R=301,L]
+RewriteRule ^blog/depilacao-a-laser-durante-a-gravidez/?$ /depilacao-a-laser.html#faq [R=301,L]
+RewriteRule ^blog/depilacao-a-laser-masculina/?$ /depilacao-a-laser.html#masculino [R=301,L]
+RewriteRule ^blog/duvidas-sobre-depilacao-a-cera/?$ /servicos.html#faq-cera [R=301,L]
+RewriteRule ^blog/vantagens-do-laser-depillagos/?$ /depilacao-a-laser.html [R=301,L]
+RewriteRule ^blog/?$ / [R=301,L]
+
+# Old store pages
+RewriteRule ^lojas/loja-bacaxa/?$ /contato.html [R=301,L]
+RewriteRule ^lojas/loja-araruama/?$ /contato.html [R=301,L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript text/xml application/xml image/svg+xml
+</IfModule>
+
+# Custom 404
+ErrorDocument 404 /index.html

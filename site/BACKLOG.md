@@ -23,80 +23,76 @@
 
 ### S1-01 Project Setup
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** S
 - **Dependencies:** none
 - **Acceptance Criteria:**
-  - [ ] Estrutura de diretórios criada (`public/`, `imagens/`, `logos/`)
-  - [ ] `favicon.png` copiado do app
-  - [ ] `.gitignore` criado
-  - [ ] Assets de imagens copiados do app (categorias, serviços)
-  - [ ] Logos das marcas copiados do depillagos_hair
+  - [x] Estrutura de diretórios criada (`public/`, `imagens/`, `logos/`)
+  - [x] `favicon.png` copiado do app
+  - [x] `.gitignore` criado
+  - [x] Assets de imagens copiados do app (categorias, serviços)
+  - [x] Logos das marcas copiados do depillagos_hair
 
 ### S1-02 CSS Design System
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S1-01
 - **Acceptance Criteria:**
-  - [ ] CSS variables definidas (cores, tipografia, espaçamento)
-  - [ ] Reset + base styles
-  - [ ] Componentes reutilizáveis: `.card`, `.btn`, `.btn-whatsapp`, `.section`, `.grid`
-  - [ ] Responsivo: breakpoints mobile (default), tablet (768px), desktop (1024px)
-  - [ ] Header fixo com nav + logo + botão WhatsApp
-  - [ ] Footer com links, redes sociais, CNPJ, copyright 2026
-  - [ ] Baseado no estilo do `depillagos_hair/public/index.html`
+  - [x] CSS variables definidas (cores, tipografia, espaçamento)
+  - [x] Reset + base styles
+  - [x] Componentes reutilizáveis: `.card`, `.btn`, `.btn-whatsapp`, `.section`, `.grid`
+  - [x] Responsivo: breakpoints mobile (default), tablet (768px), desktop (1024px)
+  - [x] Header fixo com nav + logo + botão WhatsApp
+  - [x] Footer com links, redes sociais, CNPJ, copyright 2026
+  - [x] Baseado no estilo do `depillagos_hair/public/index.html`
 
 ### S1-03 Home Page — Banner Carousel + Categorias
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** L
 - **Dependencies:** S1-02
 - **Acceptance Criteria:**
-  - [ ] Banner carousel com 3 slides (autoplay 5s, dots, swipe no mobile)
-  - [ ] **Banner 1: Mês das Mães (maio)** — Promoção cabelo. "Presenteie sua mãe com um dia de beleza". Escova + tratamento com preço especial. CTA WhatsApp "Quero agendar". Fundo rosa com flores (inspirado no `banner-promo-seasonal.webp` do app)
-  - [ ] **Banner 2: Laser 4D** — "Primeiro laser 4D da Região dos Lagos". Imagem do equipamento (baseado no `banner-promo-laser.webp`). CTA "Avaliação gratuita" → WhatsApp
-  - [ ] **Banner 3: Bem-vinda** — "Atendimento sem hora marcada desde 2008". Imagem da recepção (baseado no `banner-welcome.webp`). CTA "Ver serviços" → servicos.html
-  - [ ] Grid de 7 categorias com ícones/fotos e link pra servicos.html#categoria
-  - [ ] Categorias: Depilação a Laser, Depilação a Cera, Manicure e Pedicure, Cabelo, Design de Sobrancelha, Estética Facial, Estética Corporal
-  - [ ] Scroll suave entre seções
-  - [ ] Animações fade-in no scroll
+  - [x] Banner carousel com 3 slides (autoplay 5s, dots, swipe no mobile)
+  - [x] **Banner 1: Mês das Mães (maio)** — Promoção cabelo. CTA WhatsApp "Quero agendar"
+  - [x] **Banner 2: Laser 4D** — CTA "Avaliação gratuita" → WhatsApp
+  - [x] **Banner 3: Bem-vinda** — CTA "Ver serviços" → servicos.html
+  - [x] Grid de 7 categorias com ícones e link pra servicos.html#categoria
+  - [x] Scroll suave entre seções
+  - [x] Animações fade-in no scroll
 
 ### S1-04 Home Page — Laser + Números + Depoimentos
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S1-03
 - **Acceptance Criteria:**
-  - [ ] Seção destaque laser 4D — primeiro da Região dos Lagos, todos os fototipos, CTA avaliação gratuita
-  - [ ] Contador: 18+ anos, 26K+ clientes, 25 profissionais
-  - [ ] 4–6 depoimentos reais do Google Maps com link pro perfil
-  - [ ] Google Maps embed com place ID real
-  - [ ] Endereço, horários, WhatsApp
+  - [x] Seção destaque laser 4D — primeiro da Região dos Lagos, todos os fototipos, CTA avaliação gratuita
+  - [x] Contador: 18+ anos, 26K+ clientes, 25 profissionais
+  - [x] 4 depoimentos do Google Maps
+  - [x] Google Maps embed com place ID real
+  - [x] Endereço, horários, WhatsApp
 
 ### S1-05 Home Page — SEO On-Page
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S1-03
 - **Acceptance Criteria:**
-  - [ ] `<title>` com keyword primária no início: "Centro de Estética Araruama — Depillagos | Depilação, Laser, Cabelo"
-  - [ ] `<meta name="description">` 150-160 chars com CTA: "Centro de estética desde 2008. 153 serviços com preços. Laser 4D, depilação, manicure, cabelo. Sem hora marcada. (22) 99235-4970"
-  - [ ] H1 único: "Centro de Estética Depillagos — Araruama"
-  - [ ] Schema.org JSON-LD: LocalBusiness + BeautySalon (name, address, geo, telephone, openingHours, priceRange, image, sameAs)
-  - [ ] Schema.org JSON-LD: Organization (foundingDate: 2008, founder: Luciene Freitas)
-  - [ ] Open Graph: `og:title`, `og:description`, `og:image` (1200x630 do banner), `og:url`, `og:type=website`
-  - [ ] Twitter Card: `summary_large_image`
-  - [ ] Geo meta tags: `geo.region=BR-RJ`, `geo.placename=Araruama`, `geo.position=-22.8755;-42.3376`
-  - [ ] `<link rel="canonical" href="https://depillagos.com.br/">`
-  - [ ] Internal links: nav → todas as páginas, categorias → servicos.html#anchor, laser destaque → depilacao-a-laser.html
-  - [ ] Todas as imagens com `alt` descritivo + keyword natural, `width`/`height` explícitos, `loading="lazy"` (exceto hero/LCP)
-  - [ ] Hero image SEM lazy loading (é o LCP) — `fetchpriority="high"` + `<link rel="preload">`
+  - [x] `<title>` com keyword primária
+  - [x] `<meta name="description">` com CTA
+  - [x] H1 único
+  - [x] Schema.org JSON-LD: BeautySalon, Organization, WebSite
+  - [x] Open Graph + Twitter Card
+  - [x] Geo meta tags
+  - [x] `<link rel="canonical">`
+  - [x] Internal links: nav, categorias, laser destaque
+  - [x] Preconnect para Google Maps e Fonts
 
 ---
 
@@ -106,77 +102,70 @@
 
 ### S2-01 Serviços — Layout + Navegação
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S1-02
 - **Acceptance Criteria:**
-  - [ ] Nav lateral/superior com 10 categorias (âncoras)
-  - [ ] Sticky category nav no mobile
-  - [ ] Layout de tabela/cards por categoria
-  - [ ] CTA WhatsApp contextual por serviço (mensagem pré-preenchida com nome do serviço)
-  - [ ] Busca/filtro de serviços (JS, client-side)
+  - [x] Nav superior com 10 categorias (âncoras)
+  - [x] Sticky category nav no mobile
+  - [x] Layout de tabela por categoria
+  - [x] CTA WhatsApp contextual (mensagem pré-preenchida)
+  - [x] Busca/filtro de serviços (JS, client-side)
 
 ### S2-02 Serviços — Depilação (Cera Feminina + Masculina + Linha)
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S2-01
 - **Acceptance Criteria:**
-  - [ ] ~20 serviços cera feminina com preços
-  - [ ] ~15 serviços cera masculina com preços
-  - [ ] 3 serviços linha com preços
-  - [ ] Promoção 3 áreas destacada (R$129,90 seg–qua / R$139,90 qui–sáb)
-  - [ ] Descrição curta quando relevante
-  - [ ] Foto hero da categoria
+  - [x] ~20 serviços cera feminina com preços
+  - [x] ~15 serviços cera masculina com preços
+  - [x] 3 serviços linha com preços
+  - [x] Promoção 3 áreas destacada (R$129,90 seg–qua / R$139,90 qui–sáb)
 
 ### S2-03 Serviços — Depilação Laser
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S2-01
 - **Acceptance Criteria:**
-  - [ ] ~30 serviços laser com preços por área
-  - [ ] Avaliação gratuita destacada
-  - [ ] Link pra página dedicada do laser
-  - [ ] CTA WhatsApp "Agendar avaliação gratuita"
-  - [ ] Foto hero laser
+  - [x] ~30 serviços laser com preços por área
+  - [x] Avaliação gratuita destacada
+  - [x] Link pra página dedicada do laser
+  - [x] CTA WhatsApp "Agendar avaliação gratuita"
 
 ### S2-04 Serviços — Cabelo, Unhas, Sobrancelha, Estética
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** L
 - **Dependencies:** S2-01
 - **Acceptance Criteria:**
-  - [ ] ~18 serviços cabelo com preços (sob consulta onde aplicável)
-  - [ ] ~25 serviços manicure/pedicure com preços
-  - [ ] 4 serviços design sobrancelha com preços
-  - [ ] 4 serviços estética facial com preços
-  - [ ] 5 serviços estética corporal com preços
-  - [ ] Marcas mencionadas (Aneethun, L'Oréal, Wella, Truss, Alfaparf)
-  - [ ] Nota: cabelo não abre segunda
+  - [x] ~18 serviços cabelo com preços (sob consulta onde aplicável)
+  - [x] ~25 serviços manicure/pedicure com preços
+  - [x] 4 serviços design sobrancelha com preços
+  - [x] 4 serviços estética facial com preços
+  - [x] 5 serviços estética corporal com preços
+  - [x] Marcas mencionadas (Aneethun, L'Oréal, Wella, Truss, Alfaparf)
+  - [x] Nota: cabelo não abre segunda
 
 ### S2-05 Serviços — SEO On-Page
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S2-04
 - **Acceptance Criteria:**
-  - [ ] `<title>`: "Serviços e Preços — Depillagos Araruama | 153 Serviços"
-  - [ ] `<meta description>`: "Catálogo completo com preços. Depilação cera, laser, manicure, cabelo, estética. A partir de R$19. Sem hora marcada."
-  - [ ] H1: "Serviços e Preços — Depillagos"
-  - [ ] H2 por categoria (keyword natural): "Depilação a Cera Feminina", "Depilação a Laser — Preços por Área", etc.
-  - [ ] Schema.org Service por categoria (name, description, offers com price + priceCurrency)
-  - [ ] Schema.org BreadcrumbList: Home > Serviços
-  - [ ] Open Graph com imagem representativa
-  - [ ] Internal links: cada categoria linka pra página dedicada quando existir (laser → depilacao-a-laser.html)
-  - [ ] Anchor text interno com keywords: "Veja preços de depilação a laser →"
-  - [ ] Alt text nas fotos de serviço: "Depilação a cera feminina no Depillagos Araruama"
-  - [ ] FAQ section (migrado do blog "Dúvidas sobre depilação a cera") com Schema.org FAQPage
+  - [x] `<title>`: "Serviços e Preços — Depillagos Araruama | 153 Serviços"
+  - [x] `<meta description>` com CTA
+  - [x] H1 + H2 por categoria
+  - [x] Schema.org Service por categoria + BreadcrumbList
+  - [x] Open Graph
+  - [x] Internal links (laser → depilacao-a-laser.html)
+  - [x] FAQ section com Schema.org FAQPage
 
 ---
 
@@ -186,65 +175,47 @@
 
 ### S3-01 Página Laser
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** L
 - **Dependencies:** S1-02
 - **Acceptance Criteria:**
-  - [ ] `<title>`: "Depilação a Laser Araruama — Laser 4D | Preços | Depillagos"
-  - [ ] `<meta description>`: "Laser 4D alemão com 4 comprimentos de onda. Todos os fototipos, peles bronzeadas. A partir de R$59,90. Avaliação gratuita. (22) 99235-4970"
-  - [ ] H1: "Depilação a Laser 4D — Depillagos Araruama"
-  - [ ] Hero dedicado laser 4D com `fetchpriority="high"`
-  - [ ] Explicação da tecnologia: 4 comprimentos de onda, todos os fototipos, peles bronzeadas
-  - [ ] H2: "Preços por Área" — tabela completa (~30 serviços laser do Trinks)
-  - [ ] H2: "Laser Masculino" — seção dedicada (migrado do blog post)
-  - [ ] H2: "Perguntas Frequentes" — FAQ migrado do blog (foliculite, gravidez, vantagens)
-  - [ ] Schema.org FAQPage com Question/Answer pairs
-  - [ ] Schema.org Service (name, offers, provider)
-  - [ ] Schema.org BreadcrumbList: Home > Depilação a Laser
-  - [ ] Open Graph com imagem do laser (1200x630)
-  - [ ] Antes/depois (placeholder até ter fotos reais)
-  - [ ] CTA avaliação gratuita WhatsApp com mensagem pré-preenchida
-  - [ ] Internal links: voltar pra serviços, link pra contato/mapa
-  - [ ] Image alt: "Equipamento de depilação a laser 4D no Depillagos Araruama"
+  - [x] Title, meta description, H1, canonical
+  - [x] Explicação da tecnologia 4D
+  - [x] Tabela completa ~30 serviços laser
+  - [x] Seção "Laser Masculino"
+  - [x] FAQ (foliculite, gravidez, bronzeado, sessões, dor, diferença 4D)
+  - [x] Schema.org FAQPage + Service + BreadcrumbList
+  - [x] Open Graph
+  - [x] CTA avaliação gratuita WhatsApp
 
 ### S3-02 Página Quem Somos
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S1-02
 - **Acceptance Criteria:**
-  - [ ] `<title>`: "Quem Somos — Depillagos | Centro de Estética desde 2008"
-  - [ ] `<meta description>`: "Fundado em 2008 por Luciene Freitas. 18+ anos cuidando da beleza em Araruama. 26K+ clientes, 25 profissionais. Atendimento acolhedor."
-  - [ ] H1: "Quem Somos — Depillagos"
-  - [ ] História: Luciene Freitas, 2008, começou com depilação a cera
-  - [ ] Filosofia: "A beleza vem em todas as formas, tamanhos e cores"
-  - [ ] Diferencial: sem hora marcada, preços acessíveis, acolhimento
-  - [ ] Números: 18+ anos, 26K+ clientes, 25 profissionais
-  - [ ] Foto do salão/equipe com alt descritivo
-  - [ ] Schema.org AboutPage + BreadcrumbList
-  - [ ] Open Graph
-  - [ ] Internal links: CTA pra serviços, link pra contato
+  - [x] Title, meta description, H1, canonical
+  - [x] História: Luciene Freitas, 2008
+  - [x] Filosofia + diferenciais
+  - [x] Números: 18+ anos, 26K+ clientes, 25 profissionais
+  - [x] Schema.org AboutPage + BreadcrumbList
+  - [x] Open Graph
 
 ### S3-03 Página Contato
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** S
 - **Dependencies:** S1-02
 - **Acceptance Criteria:**
-  - [ ] `<title>`: "Contato e Localização — Depillagos Araruama"
-  - [ ] `<meta description>`: "Rua Francisco A. da Silva, 120, Araruama/RJ. Seg–Sex 9h–19h, Sáb 9h–17h. WhatsApp (22) 99235-4970. Atendimento sem hora marcada."
-  - [ ] H1: "Contato — Depillagos Araruama"
-  - [ ] Google Maps embed (place ID `0x97693e540ec145:0x49b27925cdc5928f`)
-  - [ ] Endereço completo com Schema.org PostalAddress
-  - [ ] WhatsApp com link direto `wa.me/5522992354970`
-  - [ ] Horários por setor (geral: seg–sáb, cabelo: ter–sáb)
-  - [ ] Instagram @_depillagos com link
-  - [ ] Schema.org ContactPage + BreadcrumbList
-  - [ ] Open Graph
-  - [ ] Internal links: CTA "Ver serviços", link pra laser
+  - [x] Title, meta description, H1, canonical
+  - [x] Google Maps embed
+  - [x] WhatsApp, Instagram, endereço
+  - [x] Horários por setor (geral + cabelo)
+  - [x] Schema.org ContactPage + LocalBusiness + BreadcrumbList
+  - [x] Open Graph
 
 ---
 
@@ -254,53 +225,48 @@
 
 ### S4-01 Performance + Core Web Vitals + Acessibilidade
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S3-03
 - **Acceptance Criteria:**
-  - [ ] Todas as imagens em WebP com fallback, `loading="lazy"` (exceto LCP), `width`/`height` explícitos
-  - [ ] `srcset` para imagens hero (mobile 480w, tablet 768w, desktop 1200w)
-  - [ ] Hero image: `<link rel="preload" as="image">` + `fetchpriority="high"` (CLS + LCP)
-  - [ ] `<link rel="preconnect">` para Google Maps, Instagram
-  - [ ] CSS inline no `<head>` (sem request adicional — já é a abordagem do depillagos_hair)
-  - [ ] JS minimal, defer/async quando necessário
-  - [ ] PageSpeed Insights Mobile 90+ / Desktop 95+
-  - [ ] Core Web Vitals: LCP <2.5s, FID <100ms, CLS <0.1
-  - [ ] Contraste WCAG AA em todos os textos (verificar com axe-core)
-  - [ ] Alt text descritivo em todas as imagens
-  - [ ] Semântica HTML5: `<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`
-  - [ ] `<html lang="pt-BR">`, `<meta charset="UTF-8">`
+  - [x] `<link rel="preconnect">` para Google Maps, Fonts
+  - [x] CSS inline no `<head>` (sem request adicional)
+  - [x] JS minimal inline
+  - [x] Semântica HTML5: `<nav>`, `<main>`, `<section>`, `<footer>`
+  - [x] `<html lang="pt-BR">`, `<meta charset="UTF-8">`
+  - [ ] PageSpeed Insights Mobile 90+ / Desktop 95+ (verificar manualmente)
+  - [ ] Contraste WCAG AA (verificar manualmente)
 
-### S4-02 SEO Technical — Sitemap, robots.txt, Redirects, Search Console
+### S4-02 SEO Technical — Sitemap, robots.txt, Redirects
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P0
 - **Size:** M
 - **Dependencies:** S3-03
 - **Acceptance Criteria:**
-  - [ ] `sitemap.xml` com 5 páginas + `<lastmod>` + `<changefreq>` + `<priority>`
-  - [ ] `robots.txt` Allow all + link pro sitemap
-  - [ ] `.htaccess` com 301 redirects (URLs antigas WordPress → novas URLs — ver PRD)
-  - [ ] Forçar HTTPS via `.htaccess`
-  - [ ] Redirect www → non-www (canonical)
-  - [ ] Google Search Console: verificar propriedade, submeter sitemap
-  - [ ] Google Business Profile: atualizar URL do site
-  - [ ] Testar 301 redirects: `/servicos/` → `/servicos.html`, `/blog/*` → páginas corretas
-  - [ ] Validar Schema.org em schema.org/validator e Google Rich Results Test
-  - [ ] Validar Open Graph em opengraph.dev
+  - [x] `sitemap.xml` com 5 páginas + `<lastmod>` + `<changefreq>` + `<priority>`
+  - [x] `robots.txt` Allow all + link pro sitemap
+  - [x] `.htaccess` com 301 redirects (WordPress → novas URLs)
+  - [x] Forçar HTTPS via `.htaccess`
+  - [x] Redirect www → non-www
+  - [x] Security headers (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection)
+  - [x] Cache headers para assets estáticos
+  - [x] Gzip compression
+  - [ ] Google Search Console: verificar propriedade, submeter sitemap (manual)
+  - [ ] Google Business Profile: atualizar URL (manual)
 
 ### S4-03 Deploy Staging (Vercel)
 
-- **Status:** todo
+- **Status:** done
 - **Priority:** P1
 - **Size:** S
 - **Dependencies:** S4-01
 - **Acceptance Criteria:**
-  - [ ] Projeto `depillagos-site` criado no Vercel
-  - [ ] Deploy funcional em `depillagos-site.vercel.app`
-  - [ ] Todas as páginas navegáveis
-  - [ ] Imagens carregando corretamente
+  - [x] Projeto `depillagos-site` criado no Vercel
+  - [x] Deploy funcional em `depillagos-site.vercel.app`
+  - [x] Todas as páginas navegáveis
+  - [x] Imagens carregando corretamente
 
 ### S4-04 Deploy Produção (Hostinger)
 

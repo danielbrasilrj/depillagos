@@ -67,6 +67,10 @@ Landing page estática do setor de cabeleireiro. Tema sazonal, campanha Mês da 
 Novo depillagos.com.br — site estático com preços reais do Trinks, substituindo o WordPress atual (lento, desatualizado).
 - Detalhes em `site/CLAUDE.md`
 
+### Contador inteligente (`contador_inteligente/`)
+Reorganização tributária da Depillagos. Diagnóstico fiscal, análise de ineficiências, modelagem de cenários (Salão-Parceiro, coworking, híbrido, holding), plano de transição.
+- Detalhes em `contador_inteligente/CLAUDE.md`
+
 ### Tráfego pago (`trafego_pago/`)
 Ainda sem implementação.
 
