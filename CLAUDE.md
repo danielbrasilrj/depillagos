@@ -12,7 +12,6 @@ Centro de estética fundado em **2008 por Luciene Freitas** em Araruama/RJ (Regi
 
 **Unidades:**
 - **Araruama** (matriz): Rua Francisco A. da Silva, 120 — todos os serviços
-- **Bacaxá** (filial): Rua Prof. Francisco Fonseca, 177 — apenas depilação (cera e laser)
 
 **Serviços (10 categorias, 153 no catálogo):**
 - Depilação a laser — diferencial principal: laser 4D alemão com 4 comprimentos de onda, primeiro da Região dos Lagos, atende todos os fototipos incluindo peles bronzeadas
@@ -27,6 +26,7 @@ Centro de estética fundado em **2008 por Luciene Freitas** em Araruama/RJ (Regi
 ## Operação
 
 **Trinks** é o sistema de gestão (POS) usado no dia a dia do salão: cadastro de clientes, catálogo de serviços, agendamentos, registro de atendimentos e pagamentos, gestão de profissionais. É a fonte de verdade dos dados operacionais. API REST disponível (docs: https://trinks.readme.io/reference/introducao).
+Utilize o Trinks MCP para extrair dados de clientes, serviços, atendimentos e pagamentos conforme necessário para os projetos.
 
 **Notas fiscais:** cada atendimento gera uma NFS-e emitida pelo município. Quando há rateio com parceiro MEI, a nota descreve a divisão de valores. Todo mês o Daniel precisa extrair essas notas e mandar pro contador.
 
@@ -54,6 +54,11 @@ Análise jurídica e contraproposta do contrato de locação do imóvel da matri
 
 ### Controle financeiro (`controle_financeiro/`, neste repo)
 Análise e cruzamento do quadro financeiro mensal (Miro) com dados do Trinks e Avec. Fontes: API Trinks (`/v1/lancamentos`) para despesas/comissões e relatório Avec para comissões de parceiras MEI (manicure, cabeleireiras). Corte semanal aos sábados.
+
+### Câmeras de monitoramento (`cameras_monitoramento/`, neste repo)
+Sistema de monitoramento inteligente com contagem automática de clientes/funcionários via IA (YOLOv8) e reconhecimento facial de funcionários (InsightFace). Duas câmeras PoE na entrada, processamento local (Mini PC Intel N100 + Coral TPU), gravação em SSD externo, dashboard remoto via Oracle Cloud Free Tier (DC São Paulo).
+- Stack: Python (FastAPI) + Next.js + PostgreSQL
+- Detalhes técnicos em `cameras_monitoramento/CLAUDE.md`
 
 ### Tráfego pago (`trafego_pago/`, neste repo)
 Ainda sem implementação.
