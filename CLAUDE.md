@@ -63,7 +63,11 @@ Monitoramento inteligente com contagem de clientes via IA e reconhecimento facia
 Landing page estática do setor de cabeleireiro. Tema sazonal, campanha Mês da Mulher (mar/2026). Vercel + Hostinger.
 - Detalhes em `depillagos_hair/CLAUDE.md`
 
-### Tráfego pago (`trafego_pago/`, neste repo)
+### Novo site institucional (`site/`)
+Novo depillagos.com.br — site estático com preços reais do Trinks, substituindo o WordPress atual (lento, desatualizado).
+- Detalhes em `site/CLAUDE.md`
+
+### Tráfego pago (`trafego_pago/`)
 Ainda sem implementação.
 
 ## Regras de desenvolvimento
