@@ -21,7 +21,7 @@ Centro de estética fundado em **2008 por Luciene Freitas** em Araruama/RJ (Regi
 - Design de sobrancelha (exclusivo Araruama)
 - Cabeleireiro — escova, corte, coloração (exclusivo Araruama)
 
-**Contato:** WhatsApp (22) 99235-4970 | [depillagos.com.br](https://depillagos.com.br) | @depillagosararuama (Instagram e Facebook)
+**Contato:** WhatsApp (22) 99235-4970 | [depillagos.com.br](https://depillagos.com.br) | @depillagosararuama (Facebook) | @_depillagos (Instagram)
 
 ## Operação
 
@@ -59,6 +59,19 @@ Análise e cruzamento do quadro financeiro mensal (Miro) com dados do Trinks e A
 Sistema de monitoramento inteligente com contagem automática de clientes/funcionários via IA (YOLOv8) e reconhecimento facial de funcionários (InsightFace). Duas câmeras PoE na entrada, processamento local (Mini PC Intel N100 + Coral TPU), gravação em SSD externo, dashboard remoto via Oracle Cloud Free Tier (DC São Paulo).
 - Stack: Python (FastAPI) + Next.js + PostgreSQL
 - Detalhes técnicos em `cameras_monitoramento/CLAUDE.md`
+
+### Depillagos Hair — Landing Page (`depillagos_hair/`, neste repo)
+Landing page do setor de cabeleireiro do Depillagos. Página estática HTML com tema sazonal (atualmente: Mês da Mulher — Março 2026).
+- **URLs:** [depillagoshair.vercel.app](https://depillagoshair.vercel.app) | [depillagos.com.br/2026_mar_mes_mulher](https://www.depillagos.com.br/2026_mar_mes_mulher)
+- **Hospedagem:** Vercel (projeto `depillagos-hair`) + Hostinger (subpasta de `public_html/`)
+- **Conteúdo:** serviços de cabelo (corte, coloração, escova, tratamentos), equipe (Jacqueline, Jéssica, Tawanny), vídeos do Instagram (@_depillagos), depoimentos reais do Google Maps, promoção Escova R$49,90
+- **Marcas:** L'Oréal, Wella, Truss, Alfaparf, Aneethun
+- **Cores:** rosa da marca `#c81773` (primary), `#e065a8` (light), `#c2185b` (dark), `#fdf2f8` (background)
+- **SEO:** Schema.org HairSalon, Open Graph, geo tags, meta descriptions
+- **Horário cabelo:** Ter a Sex 9h–19h, Sáb 9h–17h (não abre segunda)
+- **Deploy Vercel:** `npx --yes vercel@latest --yes --prod --scope daniels-projects-548066da` + alias `depillagoshair.vercel.app`
+- **Deploy Hostinger:** zip de `public/` → upload no File Manager → `public_html/2026_mar_mes_mulher/`
+- Detalhes de deploy em `memory/vercel-deploy.md`
 
 ### Tráfego pago (`trafego_pago/`, neste repo)
 Ainda sem implementação.
