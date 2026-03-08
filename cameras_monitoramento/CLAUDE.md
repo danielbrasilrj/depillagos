@@ -1,5 +1,9 @@
 # Câmeras de Monitoramento — Depillagos Araruama
 
+## Apresentação
+
+https://camerasmonitoramento.vercel.app
+
 ## Objetivo
 
 Sistema de monitoramento inteligente para o salão com contagem de clientes/funcionários em tempo real, gravação em cloud, e dashboard remoto.
