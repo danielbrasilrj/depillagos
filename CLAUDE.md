@@ -40,38 +40,28 @@ Utilize o Trinks MCP para extrair dados de clientes, serviços, atendimentos e p
 ## Projetos do Daniel
 
 ### App do salão (`depillagos_app_v2/`, repo separado)
-App mobile + web para clientes. Catálogo de serviços, login por telefone (verificado contra o Trinks), Clube Depillagos (fidelidade), push notifications com sugestões inteligentes via IA, painel admin. WhatsApp como canal de contato (sem agendamento online no MVP).
+App mobile + web para clientes: catálogo, fidelidade (Clube Depillagos), push notifications com IA.
 - Stack: NestJS + React Native/Expo + PostgreSQL + TypeScript
-- Repo: `git@github-personal:danielbrasilrj/depillagos_app_v2.git`
-- Path local: `/Users/danielcarmo/Env/Projects/personal/depillagos_app_v2`
+- Path: `/Users/danielcarmo/Env/Projects/personal/depillagos_app_v2`
 
-### Extração de notas fiscais (`depillagos_notas_fiscais/`, neste repo)
-Script Python que puxa NFS-e da API nacional, identifica notas com rateio de parceiros, e gera CSV/XLSX mensal pro contador. Usa certificado digital A1 com mTLS.
-- Detalhes técnicos em `depillagos_notas_fiscais/CLAUDE.md` e `REGRAS_EXTRACAO_NOTAS.md`
+### Extração de notas fiscais (`depillagos_notas_fiscais/`)
+Script Python que puxa NFS-e e gera relatório mensal pro contador. Certificado A1 com mTLS.
+- Detalhes em `depillagos_notas_fiscais/CLAUDE.md`
 
-### Contrato de locação — Araruama (`contrato_locacao/`)
-Análise jurídica e contraproposta do contrato de locação do imóvel da matriz. Detalhes em `contrato_locacao/CLAUDE.md`.
+### Contrato de locação (`contrato_locacao/`)
+Análise jurídica e contraproposta do contrato de locação do imóvel da matriz.
+- Detalhes em `contrato_locacao/CLAUDE.md`
 
-### Controle financeiro (`controle_financeiro/`, neste repo)
-Análise e cruzamento do quadro financeiro mensal (Miro) com dados do Trinks e Avec. Fontes: API Trinks (`/v1/lancamentos`) para despesas/comissões e relatório Avec para comissões de parceiras MEI (manicure, cabeleireiras). Corte semanal aos sábados.
+### Controle financeiro (`controle_financeiro/`)
+Cruzamento do quadro financeiro mensal (Miro) com dados do Trinks e Avec. Corte semanal aos sábados.
 
-### Câmeras de monitoramento (`cameras_monitoramento/`, neste repo)
-Sistema de monitoramento inteligente com contagem automática de clientes/funcionários via IA (YOLOv8) e reconhecimento facial de funcionários (InsightFace). Duas câmeras PoE na entrada, processamento local (Mini PC Intel N100 + Coral TPU), gravação em SSD externo, dashboard remoto via Oracle Cloud Free Tier (DC São Paulo).
-- Stack: Python (FastAPI) + Next.js + PostgreSQL
-- Detalhes técnicos em `cameras_monitoramento/CLAUDE.md`
+### Câmeras de monitoramento (`cameras_monitoramento/`)
+Monitoramento inteligente com contagem de clientes via IA e reconhecimento facial. Câmeras PoE + Mini PC local + Oracle Cloud.
+- Detalhes em `cameras_monitoramento/CLAUDE.md`
 
-### Depillagos Hair — Landing Page (`depillagos_hair/`, neste repo)
-Landing page do setor de cabeleireiro do Depillagos. Página estática HTML com tema sazonal (atualmente: Mês da Mulher — Março 2026).
-- **URLs:** [depillagoshair.vercel.app](https://depillagoshair.vercel.app) | [depillagos.com.br/2026_mar_mes_mulher](https://www.depillagos.com.br/2026_mar_mes_mulher)
-- **Hospedagem:** Vercel (projeto `depillagos-hair`) + Hostinger (subpasta de `public_html/`)
-- **Conteúdo:** serviços de cabelo (corte, coloração, escova, tratamentos), equipe (Jacqueline, Jéssica, Tawanny), vídeos do Instagram (@_depillagos), depoimentos reais do Google Maps, promoção Escova R$49,90
-- **Marcas:** L'Oréal, Wella, Truss, Alfaparf, Aneethun
-- **Cores:** rosa da marca `#c81773` (primary), `#e065a8` (light), `#c2185b` (dark), `#fdf2f8` (background)
-- **SEO:** Schema.org HairSalon, Open Graph, geo tags, meta descriptions
-- **Horário cabelo:** Ter a Sex 9h–19h, Sáb 9h–17h (não abre segunda)
-- **Deploy Vercel:** `npx --yes vercel@latest --yes --prod --scope daniels-projects-548066da` + alias `depillagoshair.vercel.app`
-- **Deploy Hostinger:** zip de `public/` → upload no File Manager → `public_html/2026_mar_mes_mulher/`
-- Detalhes de deploy em `memory/vercel-deploy.md`
+### Depillagos Hair (`depillagos_hair/`)
+Landing page estática do setor de cabeleireiro. Tema sazonal, campanha Mês da Mulher (mar/2026). Vercel + Hostinger.
+- Detalhes em `depillagos_hair/CLAUDE.md`
 
 ### Tráfego pago (`trafego_pago/`, neste repo)
 Ainda sem implementação.
