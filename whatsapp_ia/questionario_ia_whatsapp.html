@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depillagos — Informações para Agente de IA WhatsApp</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 18mm;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.55;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 24px 32px;
+  }
+  .header {
+    text-align: center;
+    border-bottom: 3px solid #c81773;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .header h1 {
+    font-size: 22pt;
+    color: #c81773;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  .header p {
+    font-size: 11pt;
+    color: #555;
+  }
+  h2 {
+    font-size: 14pt;
+    color: #c81773;
+    border-bottom: 2px solid #f3d1e4;
+    padding-bottom: 5px;
+    margin: 26px 0 12px 0;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 12pt;
+    color: #333;
+    margin: 16px 0 8px 0;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-size: 11pt;
+    color: #c81773;
+    margin: 12px 0 6px 0;
+  }
+  p, li { margin-bottom: 4px; }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; }
+  .field {
+    margin-bottom: 10px;
+  }
+  .field-label {
+    font-weight: 700;
+    color: #333;
+  }
+  .field-value {
+    margin-left: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 14px 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #c81773;
+    color: #fff;
+    text-align: left;
+    padding: 6px 10px;
+    font-weight: 600;
+  }
+  td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  tr:nth-child(even) td {
+    background: #fdf2f8;
+  }
+  .price { text-align: right; white-space: nowrap; font-weight: 600; }
+  .highlight {
+    background: #fdf2f8;
+    border-left: 4px solid #c81773;
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .faq-q {
+    font-weight: 700;
+    color: #c81773;
+    margin-top: 10px;
+  }
+  .faq-a {
+    margin-bottom: 8px;
+    padding-left: 12px;
+  }
+  .obs {
+    background: #fff8e1;
+    border-left: 4px solid #ffc107;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 10pt;
+  }
+  .section-intro {
+    color: #555;
+    font-style: italic;
+    margin-bottom: 10px;
+    font-size: 10pt;
+  }
+  .page-break { page-break-before: always; }
+  .two-cols {
+    display: flex;
+    gap: 20px;
+  }
+  .two-cols > div { flex: 1; }
+  @media print {
+    body { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Depillagos — Centro de Estética</h1>
+  <p>Modelo de Coleta de Informações para Agente de IA WhatsApp</p>
+  <p style="font-size:9pt;color:#888;margin-top:4px;">Documento gerado em 09/03/2026 — Dados extraídos do sistema Trinks e documentação interna</p>
+</div>
+
+<!-- ===== 1. INFORMAÇÕES GERAIS ===== -->
+<h2>1. Informações Gerais do Studio</h2>
+
+<div class="field"><span class="field-label">Nome Oficial:</span> Depillagos — Centro de Estética</div>
+<div class="field"><span class="field-label">CNPJ:</span> 09.223.558/0001-00</div>
+<div class="field"><span class="field-label">Fundação:</span> 2008, por Luciene Freitas</div>
+<div class="field"><span class="field-label">Endereço:</span> Rua Francisco A. da Silva, 120, Centro, Araruama, RJ — CEP 28970-000</div>
+<div class="field"><span class="field-label">Ponto de Referência:</span> Região dos Lagos, RJ. Araruama fica a ~1h30 do Rio de Janeiro.</div>
+<div class="field"><span class="field-label">WhatsApp:</span> (22) 99235-4970</div>
+<div class="field"><span class="field-label">Website:</span> <a href="https://depillagos.com.br">depillagos.com.br</a></div>
+<div class="field"><span class="field-label">Instagram:</span> @_depillagos</div>
+<div class="field"><span class="field-label">Facebook:</span> @depillagosararuama</div>
+
+<h3>Horário de Funcionamento</h3>
+<table>
+  <tr><th>Setor</th><th>Dias</th><th>Horário</th></tr>
+  <tr><td>Depilação, Manicure, Estética, Sobrancelha</td><td>Segunda a Sexta</td><td>9h às 19h</td></tr>
+  <tr><td></td><td>Sábado</td><td>9h às 17h</td></tr>
+  <tr><td></td><td>Domingo</td><td>Fechado</td></tr>
+  <tr><td>Cabelo (Escova, Corte, Coloração)</td><td>Terça a Sexta</td><td>9h às 19h</td></tr>
+  <tr><td></td><td>Sábado</td><td>9h às 17h</td></tr>
+  <tr><td></td><td>Segunda e Domingo</td><td>Fechado</td></tr>
+</table>
+
+<div class="obs">Em vésperas de feriado, recomenda-se confirmar funcionamento pelo WhatsApp.</div>
+
+<!-- ===== 2. POLÍTICA DE AGENDAMENTO ===== -->
+<h2>2. Política de Agendamento</h2>
+
+<div class="highlight">
+  <strong>Modelo walk-in:</strong> A Depillagos funciona <strong>sem hora marcada</strong> para a maioria dos serviços — é só chegar e ser atendido por ordem de chegada.
+</div>
+
+<h3>Serviços com agendamento</h3>
+<p>Os seguintes serviços aceitam/recomendam agendamento via WhatsApp:</p>
+<ul>
+  <li><strong>Avaliação gratuita de Laser</strong> — agendar pelo WhatsApp</li>
+  <li><strong>Fibra de Vidro, Banho de Gel e Unhas Acrigel</strong> — agendar pelo WhatsApp</li>
+  <li><strong>Estética (facial e corporal)</strong> — agendar pelo WhatsApp</li>
+</ul>
+<p>Demais serviços (depilação a cera, manicure, pedicure, cabelo, sobrancelha): <strong>sem hora marcada, é só chegar!</strong></p>
+
+<div class="field"><span class="field-label">Como agendar:</span> Via WhatsApp (22) 99235-4970</div>
+<div class="field"><span class="field-label">Informações necessárias:</span> Nome completo, telefone, serviço desejado, preferência de data/horário.</div>
+<div class="field"><span class="field-label">Sinal para agendar?</span> Não cobramos sinal. Pagamento feito no salão após o atendimento.</div>
+<div class="field"><span class="field-label">Tolerância para atrasos:</span> Não aplicável para walk-in. Para serviços agendados, pedimos pontualidade.</div>
+
+<h3>Como treinar a IA para novas promoções ou horários especiais?</h3>
+<p>Basta enviar as informações atualizadas (nova promoção, horário especial, feriado etc.) pelo WhatsApp para a equipe de suporte da IA. O agente será atualizado com os novos dados.</p>
+
+<!-- ===== 3. CANCELAMENTO ===== -->
+<h2>3. Política de Cancelamento e Reagendamento</h2>
+
+<div class="field"><span class="field-label">Prazo para cancelar ou reagendar:</span> Pedimos que cancelem ou reagendem com no mínimo <strong>24 horas de antecedência</strong> para serviços agendados (laser, fibra de vidro, banho de gel, acrigel, estética).</div>
+<div class="field"><span class="field-label">Política para cancelamentos tardios / No-Show:</span> A IA envia <strong>mensagem de lembrete automática</strong> antes do horário agendado. Em caso de não comparecimento sem aviso prévio, poderá ser solicitado pagamento antecipado para o próximo agendamento.</div>
+<div class="field"><span class="field-label">Como cancelar/reagendar:</span> Entrar em contato pelo WhatsApp (22) 99235-4970 o quanto antes.</div>
+<p style="margin-top:8px;">Para serviços walk-in (sem agendamento), não há política de cancelamento — basta comparecer quando desejar.</p>
+
+<!-- ===== 4. FORMAS DE PAGAMENTO ===== -->
+<h2>4. Formas de Pagamento Aceitas</h2>
+
+<div class="two-cols">
+  <div>
+    <h4>Cartão de Crédito</h4>
+    <ul>
+      <li>Visa</li>
+      <li>Mastercard</li>
+      <li>Elo</li>
+      <li>American Express</li>
+      <li>Diners</li>
+      <li>Banescard</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Cartão de Débito</h4>
+    <ul>
+      <li>Visa Electron</li>
+      <li>Maestro / Redeshop</li>
+      <li>Elo Débito</li>
+    </ul>
+    <h4>Outros</h4>
+    <ul>
+      <li>PIX</li>
+      <li>Dinheiro</li>
+      <li>Vale-Presente</li>
+    </ul>
+  </div>
+</div>
+
+<div class="obs">Algumas promoções (como combo 3 áreas de depilação 2ª a 4ª) são válidas apenas para pagamento em dinheiro ou PIX.</div>
+
+<!-- ===== 5. CATÁLOGO DE SERVIÇOS ===== -->
+<h2 class="page-break">5. Catálogo de Serviços — 153 serviços em 10 categorias</h2>
+
+<h3>Depilação a Cera Feminina</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Virilha Total com Ânus</td><td class="price">R$ 82,00</td></tr>
+  <tr><td>Virilha Cavada</td><td class="price">R$ 64,50</td></tr>
+  <tr><td>Virilha Cavada com Ânus</td><td class="price">R$ 79,00</td></tr>
+  <tr><td>Perna Inteira</td><td class="price">R$ 81,00</td></tr>
+  <tr><td>Virilha Total</td><td class="price">R$ 68,00</td></tr>
+  <tr><td>Braço</td><td class="price">R$ 50,00</td></tr>
+  <tr><td>Meia Perna</td><td class="price">R$ 45,00</td></tr>
+  <tr><td>Coxa</td><td class="price">R$ 45,00</td></tr>
+  <tr><td>Costas</td><td class="price">R$ 45,00</td></tr>
+  <tr><td>Nádega</td><td class="price">R$ 42,00</td></tr>
+  <tr><td>Virilha Comum</td><td class="price">R$ 40,00</td></tr>
+  <tr><td>Sobrancelha (Limpeza)</td><td class="price">R$ 39,00</td></tr>
+  <tr><td>Meio Braço</td><td class="price">R$ 38,00</td></tr>
+  <tr><td>Ânus</td><td class="price">R$ 36,00</td></tr>
+  <tr><td>Axilas</td><td class="price">R$ 30,00</td></tr>
+  <tr><td>Faixa</td><td class="price">R$ 23,00</td></tr>
+  <tr><td>Nariz</td><td class="price">R$ 22,00</td></tr>
+  <tr><td>Seios</td><td class="price">R$ 21,00</td></tr>
+  <tr><td>Buço / Queixo</td><td class="price">R$ 20,00</td></tr>
+</table>
+
+<div class="highlight">
+  <strong>Promoção Combo 3 Áreas:</strong><br>
+  2ª a 4ª feira (dinheiro/PIX): <strong>R$ 129,90</strong><br>
+  5ª a Sábado: <strong>R$ 139,90</strong>
+</div>
+
+<h3>Depilação a Cera Masculina</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Virilha Total com Ânus</td><td class="price">R$ 92,00</td></tr>
+  <tr><td>Tórax + Abdômen</td><td class="price">R$ 89,00</td></tr>
+  <tr><td>Perna Inteira</td><td class="price">R$ 89,00</td></tr>
+  <tr><td>Virilha Total</td><td class="price">R$ 80,00</td></tr>
+  <tr><td>Barba</td><td class="price">R$ 64,00</td></tr>
+  <tr><td>Braço</td><td class="price">R$ 60,00</td></tr>
+  <tr><td>Costas</td><td class="price">R$ 56,00</td></tr>
+  <tr><td>Nádega</td><td class="price">R$ 55,00</td></tr>
+  <tr><td>Tórax / Virilha Comum</td><td class="price">R$ 52,00</td></tr>
+  <tr><td>Meia Perna</td><td class="price">R$ 50,00</td></tr>
+  <tr><td>Coxa</td><td class="price">R$ 49,00</td></tr>
+  <tr><td>Abdômen</td><td class="price">R$ 45,00</td></tr>
+  <tr><td>Ânus</td><td class="price">R$ 45,00</td></tr>
+  <tr><td>Sobrancelha (Limpeza)</td><td class="price">R$ 40,00</td></tr>
+  <tr><td>Ombro</td><td class="price">R$ 38,00</td></tr>
+  <tr><td>Axilas</td><td class="price">R$ 35,00</td></tr>
+  <tr><td>Faixa / Orelha</td><td class="price">R$ 28,00</td></tr>
+  <tr><td>Bigode / Queixo</td><td class="price">R$ 27,00</td></tr>
+  <tr><td>Nariz</td><td class="price">R$ 25,00</td></tr>
+</table>
+
+<h3 class="page-break">Depilação a Laser — Diferencial Principal</h3>
+
+<div class="highlight">
+  <strong>Laser 4D Alemão</strong> — Primeiro e único na Região dos Lagos. 4 comprimentos de onda simultâneos. Seguro para <strong>todos os fototipos</strong>, incluindo peles morenas e bronzeadas. Avaliação gratuita.
+</div>
+
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Corpo Todo</td><td class="price">R$ 299,00</td></tr>
+  <tr><td>Perna Completa</td><td class="price">R$ 289,00</td></tr>
+  <tr><td>Braços / Costas / Coxas / Meia Perna / Barba / Virilha Completa</td><td class="price">R$ 149,90</td></tr>
+  <tr><td>Abdômen / Axilas / Glúteos / Maçã do Rosto / Nuca / Ombros / Queixo Prolongado / Seios / Virilha Biquíni</td><td class="price">R$ 79,90</td></tr>
+  <tr><td>Ânus / Aréola / Bigode / Buço / Cóccix / Costeletas / Faixa de Barba / Linha Alba / Mãos e Dedos / Nariz / Orelhas / Perianal / Pés e Dedos / Testa</td><td class="price">R$ 59,90</td></tr>
+  <tr><td><strong>Avaliação Laser</strong></td><td class="price"><strong>Grátis</strong></td></tr>
+</table>
+
+<h3>Depilação na Linha</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Faixa</td><td class="price">R$ 28,00</td></tr>
+  <tr><td>Buço / Queixo</td><td class="price">R$ 26,00</td></tr>
+</table>
+
+<h3>Design de Sobrancelha</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Design com Henna</td><td class="price">R$ 73,00</td></tr>
+  <tr><td>Design Sobrancelha</td><td class="price">R$ 56,00</td></tr>
+  <tr><td>Sobrancelha Linha (Limpeza)</td><td class="price">R$ 42,00</td></tr>
+  <tr><td>Henna</td><td class="price">R$ 34,00</td></tr>
+</table>
+
+<h3>Manicure e Pedicure</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Fibra de Vidro</td><td class="price">R$ 179,00</td></tr>
+  <tr><td>Acrigel</td><td class="price">R$ 162,00</td></tr>
+  <tr><td>Banho de Gel (mão inclusa)</td><td class="price">R$ 99,00</td></tr>
+  <tr><td>Fibra de Vidro (Manutenção)</td><td class="price">R$ 99,00</td></tr>
+  <tr><td>Acrigel (Manutenção)</td><td class="price">R$ 89,00</td></tr>
+  <tr><td>Spa do Pé (Calosidade, inclui pedicure)</td><td class="price">R$ 85,00</td></tr>
+  <tr><td>Pedicure Permanente</td><td class="price">R$ 75,00</td></tr>
+  <tr><td>Manicure Permanente</td><td class="price">R$ 72,00</td></tr>
+  <tr><td>Unha Postiça Mão / Avulsa</td><td class="price">R$ 62–65,00</td></tr>
+  <tr><td>Pé e Mão</td><td class="price">R$ 65,00</td></tr>
+  <tr><td>Unha Encapsulada Mão</td><td class="price">R$ 52,00</td></tr>
+  <tr><td>Spa do Pé</td><td class="price">R$ 50,00</td></tr>
+  <tr><td>Acrigel (Retirada) / Fibra (Retirada)</td><td class="price">R$ 47–48,00</td></tr>
+  <tr><td>Pedicure Francesinha</td><td class="price">R$ 38,00</td></tr>
+  <tr><td>Unha Postiça (Retirada)</td><td class="price">R$ 37,00</td></tr>
+  <tr><td>Pedicure</td><td class="price">R$ 35,00</td></tr>
+  <tr><td>Manicure Francesinha</td><td class="price">R$ 33,00</td></tr>
+  <tr><td>Manicure</td><td class="price">R$ 30,00</td></tr>
+  <tr><td>Massagem Relaxante 20 min</td><td class="price">R$ 30,00</td></tr>
+  <tr><td>Unha Encapsulada Avulsa</td><td class="price">R$ 21,00</td></tr>
+  <tr><td>Pedicure Express</td><td class="price">R$ 20,00</td></tr>
+  <tr><td>Massagem Relaxante 10 min</td><td class="price">R$ 20,00</td></tr>
+  <tr><td>Manicure Express</td><td class="price">R$ 19,00</td></tr>
+  <tr><td>Aplicável (Acrigel/Fibra)</td><td class="price">R$ 16,00</td></tr>
+  <tr><td>Adicional Manicure</td><td class="price">R$ 10,00</td></tr>
+</table>
+
+<h3 class="page-break">Cabelo</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Maquiagem</td><td class="price">R$ 199,00</td></tr>
+  <tr><td>Tratamento Wella</td><td class="price">R$ 189,90</td></tr>
+  <tr><td>Cauterização (Aneethun Kera)</td><td class="price">R$ 159,90</td></tr>
+  <tr><td>Tratamento Truss</td><td class="price">R$ 159,90</td></tr>
+  <tr><td>Coloração</td><td class="price">R$ 155,00</td></tr>
+  <tr><td>Tratamento L'Oréal (com Escova)</td><td class="price">R$ 150,00</td></tr>
+  <tr><td>Tratamento Alfaparf</td><td class="price">R$ 150,00</td></tr>
+  <tr><td>Penteado</td><td class="price">R$ 130,00</td></tr>
+  <tr><td>Tratamento Aneethun</td><td class="price">R$ 130,00</td></tr>
+  <tr><td>Matização</td><td class="price">R$ 129,90</td></tr>
+  <tr><td>Plástica Capilar (Aneethun Age)</td><td class="price">R$ 119,00</td></tr>
+  <tr><td>Corte Estilizado</td><td class="price">R$ 105,00</td></tr>
+  <tr><td>Corte</td><td class="price">R$ 79,00</td></tr>
+  <tr><td>Aplicação de Tinta</td><td class="price">R$ 73,00</td></tr>
+  <tr><td>Escova</td><td class="price">R$ 63,00</td></tr>
+  <tr><td>Hidratação / Detox Capilar</td><td class="price">R$ 59,00</td></tr>
+  <tr><td>Alinhamento Capilar</td><td class="price">A partir de R$ 55,00</td></tr>
+  <tr><td>Lavar e Secar</td><td class="price">R$ 40,00</td></tr>
+  <tr><td>Baby Liss</td><td class="price">R$ 38,00</td></tr>
+  <tr><td>Prancha</td><td class="price">R$ 33,00</td></tr>
+  <tr><td>Reflexo/Luzes / Progressiva / Botox Capilar</td><td class="price">Sob consulta</td></tr>
+</table>
+
+<div class="obs">Serviços de cabelo com "sob consulta" têm preço definido após avaliação gratuita presencial. Marcas utilizadas: L'Oréal, Wella, Truss, Alfaparf, Aneethun.</div>
+
+<h3>Estética Facial</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Cílios</td><td class="price">R$ 169,00</td></tr>
+  <tr><td>Limpeza de Pele (inclui Peeling Diamante + Máscara Ouro + Vapor Ozônio)</td><td class="price">R$ 129,00</td></tr>
+  <tr><td>Peeling de Cristal</td><td class="price">R$ 89,00</td></tr>
+  <tr><td>Peeling de Diamante</td><td class="price">R$ 79,00</td></tr>
+</table>
+
+<h3>Estética Corporal</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Massagem Turbinada</td><td class="price">R$ 119,00</td></tr>
+  <tr><td>Drenagem Linfática</td><td class="price">R$ 99,00</td></tr>
+  <tr><td>Massagem Relaxante</td><td class="price">R$ 99,00</td></tr>
+  <tr><td>Esfoliação Corporal + Banho de Lua</td><td class="price">R$ 99,00</td></tr>
+  <tr><td>Esfoliação Corporal</td><td class="price">R$ 79,00</td></tr>
+</table>
+
+<h3>Outros</h3>
+<table>
+  <tr><th>Serviço</th><th class="price">Preço</th></tr>
+  <tr><td>Micropigmentação</td><td class="price">R$ 450,00</td></tr>
+  <tr><td>Micropigmentação (Manutenção)</td><td class="price">R$ 150,00</td></tr>
+  <tr><td>Experiência Única</td><td class="price">R$ 89,00</td></tr>
+</table>
+
+<!-- ===== 6. PRODUTOS ===== -->
+<h2>6. Produtos Utilizados e Vendidos</h2>
+
+<div class="field"><span class="field-label">Marcas profissionais (cabelo):</span> L'Oréal, Wella, Truss, Alfaparf, Aneethun</div>
+<div class="field"><span class="field-label">Equipamento laser:</span> Laser 4D alemão com 4 comprimentos de onda simultâneos</div>
+<div class="field"><span class="field-label">Venda de produtos ao cliente?</span> Não. Os produtos são utilizados exclusivamente nos atendimentos.</div>
+
+<!-- ===== 7. PROMOÇÕES ===== -->
+<h2>7. Promoções e Pacotes</h2>
+
+<table>
+  <tr><th>Promoção</th><th>Detalhes</th></tr>
+  <tr><td>Combo 3 Áreas Depilação (2ª a 4ª)</td><td>R$ 129,90 — pagamento em dinheiro ou PIX</td></tr>
+  <tr><td>Combo 3 Áreas Depilação (5ª a Sáb)</td><td>R$ 139,90</td></tr>
+  <tr><td>Avaliação Laser</td><td>Gratuita — agendar pelo WhatsApp</td></tr>
+  <tr><td>Mês da Mulher (Março/2026) — Escova</td><td>R$ 49,90 — Saiba mais: <a href="https://www.depillagos.com.br/2026_mar_mes_mulher/">depillagos.com.br/2026_mar_mes_mulher</a></td></tr>
+</table>
+
+<p><strong>Campanhas sazonais:</strong> Março (Mês da Mulher) com promoções especiais no setor de cabelo, e outras datas comemorativas com promoções divulgadas via Instagram e WhatsApp.</p>
+
+<!-- ===== 8. HIGIENE ===== -->
+<h2>8. Higiene e Segurança</h2>
+
+<ul>
+  <li>Ambiente profissional em conformidade com normas sanitárias</li>
+  <li>Equipamentos esterilizados e materiais descartáveis quando aplicável</li>
+  <li>Emissão de NFS-e (nota fiscal eletrônica) para cada atendimento</li>
+  <li>Laser com equipamento médico alemão certificado</li>
+  <li>Profissionais licenciados e com experiência</li>
+  <li>Ambiente limpo, organizado e higienizado regularmente</li>
+</ul>
+
+<!-- ===== 9. FAQ ===== -->
+<h2 class="page-break">9. Perguntas Frequentes (FAQ)</h2>
+
+<h3>Perguntas Gerais</h3>
+
+<p class="faq-q">P: Preciso agendar horário?</p>
+<p class="faq-a">R: Para a maioria dos serviços, não! É só chegar que atendemos por ordem de chegada. Aceitamos agendamento para: avaliação gratuita de laser, fibra de vidro, banho de gel, acrigel e serviços de estética. Agende pelo WhatsApp!</p>
+
+<p class="faq-q">P: Qual o horário de funcionamento?</p>
+<p class="faq-a">R: Segunda a Sexta das 9h às 19h, Sábado das 9h às 17h. Fechamos aos domingos. O setor de cabelo não funciona às segundas.</p>
+
+<p class="faq-q">P: Onde fica a Depillagos?</p>
+<p class="faq-a">R: Rua Francisco A. da Silva, 120, Centro, Araruama, RJ.</p>
+
+<p class="faq-q">P: Quais formas de pagamento vocês aceitam?</p>
+<p class="faq-a">R: Dinheiro, PIX, cartões de crédito e débito (Visa, Mastercard, Elo, American Express, Diners).</p>
+
+<h3>FAQ — Depilação a Laser</h3>
+
+<p class="faq-q">P: Qual é o diferencial do laser de vocês?</p>
+<p class="faq-a">R: Somos o primeiro laser 4D da Região dos Lagos — um equipamento alemão com 4 comprimentos de onda simultâneos. É seguro e eficaz para todos os fototipos, incluindo peles morenas e bronzeadas.</p>
+
+<p class="faq-q">P: O laser funciona em pele bronzeada?</p>
+<p class="faq-a">R: Sim! Nosso laser 4D atende todos os fototipos (I a VI), incluindo peles bronzeadas.</p>
+
+<p class="faq-q">P: Quantas sessões de laser são necessárias?</p>
+<p class="faq-a">R: O protocolo padrão é de <strong>10 sessões</strong>, com intervalo de 30 a 45 dias entre elas. (Obs para a IA: apenas se a cliente perguntar especificamente, mencionar que algumas pessoas podem precisar de mais sessões dependendo do caso.)</p>
+
+<p class="faq-q">P: O laser dói?</p>
+<p class="faq-a">R: Nosso laser 4D tem sistema de resfriamento integrado, tornando o procedimento muito mais confortável que a depilação a cera.</p>
+
+<p class="faq-q">P: Laser ajuda com foliculite (pelos encravados)?</p>
+<p class="faq-a">R: Sim! O laser elimina os pelos encravados ao destruir o folículo, sendo uma das melhores soluções para foliculite.</p>
+
+<p class="faq-q">P: Posso fazer laser na gravidez?</p>
+<p class="faq-a">R: Não, não é recomendado durante a gestação. Pode retomar após a amamentação. Enquanto isso, indicamos a depilação a cera.</p>
+
+<p class="faq-q">P: Quanto custa o laser?</p>
+<p class="faq-a">R: Áreas a partir de R$ 59,90. Corpo todo por R$ 299,00. A avaliação é gratuita — agende pelo WhatsApp!</p>
+
+<h3>FAQ — Depilação a Cera</h3>
+
+<p class="faq-q">P: De quanto em quanto tempo devo fazer depilação a cera?</p>
+<p class="faq-a">R: Recomendamos a cada 25 a 30 dias para que o pelo esteja no tamanho ideal para remoção pela raiz.</p>
+
+<p class="faq-q">P: Vocês fazem depilação masculina?</p>
+<p class="faq-a">R: Sim! Temos catálogo completo de depilação a cera masculina — tórax, costas, barba, perna, virilha e mais.</p>
+
+<h3>FAQ — Cabelo</h3>
+
+<p class="faq-q">P: Quais serviços de cabelo vocês oferecem?</p>
+<p class="faq-a">R: Escova (R$ 63), corte (R$ 79), corte estilizado (R$ 105), coloração (R$ 155), matização (R$ 129,90), penteado (R$ 130), maquiagem (R$ 199), além de tratamentos capilares com L'Oréal, Wella, Truss, Alfaparf e Aneethun.</p>
+
+<p class="faq-q">P: Precisa agendar para cabelo?</p>
+<p class="faq-a">R: Não! É só chegar. Progressiva, botox e reflexo/luzes têm preço definido após avaliação gratuita presencial.</p>
+
+<h3>FAQ — Manicure e Pedicure</h3>
+
+<p class="faq-q">P: Vocês fazem unhas em gel/acrigel/fibra?</p>
+<p class="faq-a">R: Sim! Banho de gel (R$ 99), acrigel (R$ 162), fibra de vidro (R$ 179), além de manutenção e retirada. Também fazemos manicure, pedicure, francesinha e permanente.</p>
+
+<!-- ===== 10. DIFERENCIAIS ===== -->
+<h2>10. Diferenciais e Ambiente do Studio</h2>
+
+<h3>O que torna a Depillagos especial?</h3>
+<ol>
+  <li><strong>Especialista e pioneira em depilação a cera em Araruama:</strong> Referência na cidade desde 2008, com know-how incomparável.</li>
+  <li><strong>Laser 4D — Único na Região dos Lagos:</strong> Equipamento alemão com 4 comprimentos de onda. Atende todos os fototipos, incluindo peles morenas e bronzeadas.</li>
+  <li><strong>Sem hora marcada:</strong> Atendimento acolhedor por ordem de chegada — sem burocracia.</li>
+  <li><strong>18 anos de experiência:</strong> Fundada em 2008 por Luciene Freitas, com 26 mil+ clientes cadastrados.</li>
+  <li><strong>153 serviços no catálogo:</strong> Centro completo — depilação (cera, laser, linha), cabelo, manicure/pedicure, estética facial e corporal, sobrancelha.</li>
+  <li><strong>25 profissionais:</strong> Equipe experiente e dedicada.</li>
+  <li><strong>Preços acessíveis e transparentes:</strong> Um espaço onde qualquer pessoa se sente à vontade.</li>
+  <li><strong>Produtos premium:</strong> L'Oréal, Wella, Truss, Alfaparf, Aneethun.</li>
+</ol>
+
+<div class="obs">Obs para a IA: Se clientes perguntarem sobre programa de fidelidade, responder com suspense: "Vem novidade por aí! Será exclusivo para clientes. Fique de olho nas nossas redes!" Não dar mais detalhes.</div>
+
+<h3>Filosofia</h3>
+<div class="highlight">
+  "A beleza vem em todas as formas, tamanhos e cores."<br>
+  Atendimento acolhedor, inclusivo, construído na confiança com cada cliente.
+</div>
+
+<h3>Ambiente</h3>
+<p>Espaço profissional, limpo e organizado. Atendimento humanizado, equipe acolhedora. Ambiente que transmite confiança e cuidado.</p>
+
+<!-- ===== EQUIPE ===== -->
+<h2>11. Equipe — 25 Profissionais</h2>
+
+<h3>Equipe Própria (CLT — 8)</h3>
+<table>
+  <tr><th>Profissional</th><th>Função</th></tr>
+  <tr><td>Ana Carolina</td><td>Depiladora</td></tr>
+  <tr><td>Daiane Santos</td><td>Depiladora</td></tr>
+  <tr><td>Patricia "Paty" Souza</td><td>Depiladora</td></tr>
+  <tr><td>Yasmin Maciel</td><td>Depiladora</td></tr>
+  <tr><td>Caroline Lima Bastos</td><td>Esteticista / Laser</td></tr>
+  <tr><td>Simone Nogueira</td><td>Recepção</td></tr>
+  <tr><td>Yasmin</td><td>Recepção</td></tr>
+  <tr><td>Renata</td><td>Limpeza</td></tr>
+</table>
+
+<h3>Profissionais Parceiras (MEI — 16)</h3>
+<table>
+  <tr><th>Profissional</th><th>Especialidade</th></tr>
+  <tr><td>Jhennifer Roza</td><td>Manicure</td></tr>
+  <tr><td>Dalleti Quintanilha</td><td>Manicure</td></tr>
+  <tr><td>Itaciana Feitosa</td><td>Manicure</td></tr>
+  <tr><td>Camila Carvalho</td><td>Manicure</td></tr>
+  <tr><td>Jari Nete</td><td>Manicure</td></tr>
+  <tr><td>Washilla Lemos</td><td>Manicure</td></tr>
+  <tr><td>Monica Mendes</td><td>Manicure</td></tr>
+  <tr><td>Isabella "Belinha"</td><td>Manicure</td></tr>
+  <tr><td>Josiane "Josi"</td><td>Manicure</td></tr>
+  <tr><td>Thays Azeredo</td><td>Manicure</td></tr>
+  <tr><td>Tauanny Lemos</td><td>Manicure</td></tr>
+  <tr><td>Jessica Marinho</td><td>Manicure</td></tr>
+  <tr><td>Sabrina / Amanda / Eychila</td><td>Manicure</td></tr>
+  <tr><td>Priscila</td><td>Cabeleireira</td></tr>
+  <tr><td>Jacqueline</td><td>Cabeleireira</td></tr>
+  <tr><td>Noemi</td><td>Cabeleireira</td></tr>
+</table>
+
+<div style="text-align:center;margin-top:40px;padding-top:16px;border-top:2px solid #f3d1e4;color:#888;font-size:9pt;">
+  Depillagos — Centro de Estética | Desde 2008 | Araruama, RJ<br>
+  WhatsApp (22) 99235-4970 | depillagos.com.br | @_depillagos
+</div>
+
+</body>
+</html>
