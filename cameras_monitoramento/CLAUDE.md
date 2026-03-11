@@ -18,7 +18,6 @@ Sistema de monitoramento inteligente para o salão com contagem de clientes/func
 | Gravação local com buffer no SSD | MVP |
 | Armazenamento de rostos (pra uso futuro) | MVP |
 | Dashboard remoto (web) | MVP |
-| Áudio (câmeras com mic) | MVP |
 | Reconhecimento facial de clientes | Post-MVP |
 | Integração com Trinks | Post-MVP |
 | Alertas WhatsApp | Post-MVP |
@@ -77,9 +76,9 @@ Com PoE, **um único cabo Ethernet resolve rede + energia**:
 
 ### Câmeras
 
-- **Câmera interna:** apontada para a porta de entrada (de dentro pra fora), com microfone embutido
+- **Câmera interna:** apontada para a porta de entrada (de dentro pra fora)
 - **Câmera externa:** apontada para a porta de entrada (de fora pra dentro), IP67 (resistente a chuva)
-- Ambas 1080p, H.265, com suporte a RTSP
+- Ambas 1080p+, H.265, com suporte a RTSP
 
 ### Rede no salão
 
@@ -100,7 +99,7 @@ Plano empresarial com pelo menos **15-20 Mbps de upload**. O consumo estimado é
 
 | Componente | Tecnologia |
 |---|---|
-| Câmeras | 2x IP PoE, 1080p, H.265, RTSP, mic embutido, IP67 (externa) |
+| Câmeras | 2x IP PoE, 1080p+, H.265, RTSP, IP67 (externa) |
 | Switch PoE | TP-Link ou similar, 4 portas |
 | Mini PC | Intel N100, 16GB RAM, 512GB SSD interno |
 | SSD externo | 1TB USB 3.0 (buffer de vídeo) |
@@ -118,7 +117,7 @@ Plano empresarial com pelo menos **15-20 Mbps de upload**. O consumo estimado é
 
 | Item | Preço estimado |
 |---|---|
-| 2x Câmeras IP PoE com mic | ~R$1.200–2.000 |
+| 2x Câmeras IP PoE | ~R$1.200–2.000 |
 | Switch PoE 4 portas | ~R$250 |
 | Mini PC Intel N100 16GB | ~R$1.800 |
 | SSD externo 1TB | ~R$400 |
