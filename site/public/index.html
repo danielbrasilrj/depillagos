@@ -266,8 +266,14 @@
         }
 
         .nav-logo img {
-            height: 36px;
+            height: 40px;
             width: auto;
+        }
+
+        .category-icon img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -473,54 +479,140 @@
         /* ========== CATEGORIES ========== */
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
         }
 
         .category-card {
             background: var(--white);
             border-radius: 16px;
-            padding: 28px 16px;
+            padding: 24px 16px 20px;
             text-align: center;
             text-decoration: none;
             color: var(--text);
             transition: all 0.3s;
             border: 1px solid var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transform: scaleX(0);
+            transition: transform 0.3s;
         }
 
         .category-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(200,23,115,0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(200,23,115,0.15);
             border-color: var(--primary-light);
         }
 
+        .category-card:hover::after {
+            transform: scaleX(1);
+        }
+
         .category-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--bg);
-            border-radius: 14px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--bg), var(--bg-dark));
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 26px;
             margin: 0 auto 14px;
+            transition: all 0.3s;
+        }
+
+        .category-icon img {
+            transition: transform 0.3s;
         }
 
         .category-card:hover .category-icon {
-            background: var(--rose);
+            background: linear-gradient(135deg, var(--rose), var(--bg-dark));
+            transform: scale(1.05);
+        }
+
+        .category-card:hover .category-icon img {
+            transform: scale(1.1);
         }
 
         .category-card h3 {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             line-height: 1.4;
+            margin-bottom: 4px;
         }
 
         .category-card .category-price {
             font-size: 12px;
             color: var(--primary);
-            font-weight: 500;
+            font-weight: 600;
             margin-top: 6px;
+            display: inline-block;
+            background: var(--bg);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        /* ========== PIONEERS ========== */
+        .pioneers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .pioneer-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 36px 32px;
+            border: 1px solid var(--bg-dark);
+            text-align: center;
+        }
+
+        .pioneer-card img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            margin-bottom: 16px;
+        }
+
+        .pioneer-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .pioneer-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .pioneer-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .pioneers-grid { grid-template-columns: 1fr; }
         }
 
         /* ========== LASER HIGHLIGHT ========== */
@@ -895,7 +987,8 @@
             }
 
             .category-card { padding: 20px 12px; }
-            .category-icon { width: 44px; height: 44px; font-size: 22px; }
+            .category-icon { width: 52px; height: 52px; font-size: 22px; }
+            .category-icon img { width: 32px; height: 32px; }
             .category-card h3 { font-size: 12px; }
 
             .section-title { font-size: 28px; }
@@ -943,7 +1036,7 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo"><img src="imagens/logo_clara.jpeg" alt="Depillagos" width="120" height="36"></a>
+            <a href="/" class="nav-logo"><img src="imagens/logo-depillagos.png" alt="Depillagos" height="40"></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="/">Home</a></li>
                 <li><a href="servicos.html">Serviços</a></li>
@@ -968,9 +1061,8 @@
                         <div class="slide-badge">Maio 2026</div>
                         <h2>Presenteie sua mãe com um <em>dia de beleza</em></h2>
                         <p>Mês das Mães no Depillagos! Escova + tratamento capilar com preço especial. Cuide de quem sempre cuidou de você.</p>
-                        <a href="https://wa.me/5522992354970?text=Ol%C3%A1!%20Quero%20agendar%20a%20promo%C3%A7%C3%A3o%20do%20M%C3%AAs%20das%20M%C3%A3es" class="btn btn-primary" target="_blank" rel="noopener">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.38-1.572l-.386-.232-3.204 1.074 1.074-3.204-.232-.386A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-                            Quero agendar
+                        <a href="https://depillagoshair.vercel.app" class="btn btn-primary" target="_blank" rel="noopener">
+                            Ver promoções &rarr;
                         </a>
                     </div>
                 </div>
@@ -1007,47 +1099,76 @@
         <section class="section section-bg">
             <div class="container">
                 <div class="section-header">
+                    <p class="section-tag">153 serviços com preço</p>
                     <h1 style="font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:var(--text); margin-bottom:12px;">Centro de Estética Depillagos — Araruama</h1>
-                    <p class="section-subtitle">Depilação a cera e laser, manicure, cabelo, sobrancelha e estética. Tudo com preço justo e sem hora marcada.</p>
+                    <p class="section-subtitle">Depilação a cera e laser, manicure, cabelo, sobrancelha e estética.<br>Tudo com preço justo e sem hora marcada.</p>
                 </div>
 
                 <!-- Categories Grid -->
                 <div class="categories-grid fade-in">
-                    <a href="servicos.html#depilacao-laser" class="category-card">
-                        <div class="category-icon">✨</div>
-                        <h3>Depilação a Laser</h3>
-                        <span class="category-price">A partir de R$59,90</span>
-                    </a>
                     <a href="servicos.html#depilacao-cera-feminina" class="category-card">
-                        <div class="category-icon">🌸</div>
+                        <div class="category-icon"><img src="imagens/servicos/cera.png" alt="Depilação a cera" width="40" height="40"></div>
                         <h3>Depilação a Cera</h3>
                         <span class="category-price">A partir de R$20</span>
                     </a>
+                    <a href="servicos.html#depilacao-laser" class="category-card">
+                        <div class="category-icon"><img src="imagens/servicos/laser.png" alt="Depilação a laser" width="40" height="40"></div>
+                        <h3>Depilação a Laser</h3>
+                        <span class="category-price">A partir de R$59,90</span>
+                    </a>
                     <a href="servicos.html#manicure-pedicure" class="category-card">
-                        <div class="category-icon">💅</div>
+                        <div class="category-icon"><img src="imagens/servicos/manicure.png" alt="Manicure e pedicure" width="40" height="40"></div>
                         <h3>Manicure e Pedicure</h3>
                         <span class="category-price">A partir de R$19</span>
                     </a>
                     <a href="servicos.html#cabelo" class="category-card">
-                        <div class="category-icon">💇</div>
+                        <div class="category-icon"><img src="imagens/servicos/cabeleireiro.png" alt="Cabelo" width="40" height="40"></div>
                         <h3>Cabelo</h3>
                         <span class="category-price">A partir de R$33</span>
                     </a>
                     <a href="servicos.html#design-sobrancelha" class="category-card">
-                        <div class="category-icon">👁️</div>
+                        <div class="category-icon"><img src="imagens/servicos/sobrancelha.png" alt="Design de sobrancelha" width="40" height="40"></div>
                         <h3>Design de Sobrancelha</h3>
                         <span class="category-price">A partir de R$34</span>
                     </a>
                     <a href="servicos.html#estetica-facial" class="category-card">
-                        <div class="category-icon">🧖</div>
+                        <div class="category-icon"><img src="imagens/servicos/facial.png" alt="Estética facial" width="40" height="40"></div>
                         <h3>Estética Facial</h3>
                         <span class="category-price">A partir de R$79</span>
                     </a>
                     <a href="servicos.html#estetica-corporal" class="category-card">
-                        <div class="category-icon">💆</div>
+                        <div class="category-icon"><img src="imagens/servicos/corporal.png" alt="Estética corporal" width="40" height="40"></div>
                         <h3>Estética Corporal</h3>
                         <span class="category-price">A partir de R$79</span>
                     </a>
+                </div>
+                <div style="text-align:center; margin-top:28px;" class="fade-in">
+                    <a href="servicos.html" class="btn" style="background:var(--white); color:var(--primary); border:2px solid var(--primary); font-weight:600;">Ver todos os 153 serviços com preço &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pioneiros -->
+        <section class="section section-white">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <p class="section-tag">Desde 2008</p>
+                    <h2 class="section-title">Pioneiros em Araruama</h2>
+                    <p class="section-subtitle">Tradição e inovação que construíram a referência em beleza da Região dos Lagos.</p>
+                </div>
+                <div class="pioneers-grid fade-in">
+                    <div class="pioneer-card">
+                        <span class="pioneer-badge">Pioneiros</span>
+                        <img src="imagens/servicos/cera.png" alt="Depilação a cera" width="56" height="56">
+                        <h3>Pioneiros em depilação a cera</h3>
+                        <p>Fomos o primeiro centro especializado em depilação a cera de Araruama. Desde 2008, milhares de clientes confiam na nossa técnica, produtos de qualidade e atendimento acolhedor.</p>
+                    </div>
+                    <div class="pioneer-card">
+                        <span class="pioneer-badge">Referência</span>
+                        <img src="imagens/servicos/manicure.png" alt="Esmalteria" width="56" height="56">
+                        <h3>Referência em esmalteria</h3>
+                        <p>Nossa esmalteria é referência na cidade. Manicure, pedicure, unhas em gel, acrigel e fibra de vidro — tudo com profissionais especializadas e os melhores produtos do mercado.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1061,7 +1182,7 @@
                         <p>O Depillagos é o primeiro centro de estética da Região dos Lagos com laser de diodo 4D. Tecnologia alemã com 4 comprimentos de onda simultâneos para resultados superiores.</p>
                         <ul class="laser-features">
                             <li>4 comprimentos de onda simultâneos</li>
-                            <li>Atende todos os fototipos (I a VI)</li>
+                            <li>Atende todos os 6 fototipos</li>
                             <li>Seguro para peles bronzeadas</li>
                             <li>Sessões rápidas e confortáveis</li>
                             <li>Avaliação gratuita</li>
@@ -1206,7 +1327,7 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
-                <img src="imagens/logo_escura.jpeg" alt="Depillagos" class="footer-logo" width="100" height="32">
+                <img src="imagens/logo-depillagos-branca.png" alt="Depillagos" class="footer-logo" height="36">
                 <p>Centro de estética em Araruama desde 2008. A beleza vem em todas as formas, tamanhos e cores.</p>
                 <div class="footer-social">
                     <a href="https://www.instagram.com/_depillagos" target="_blank" rel="noopener" aria-label="Instagram Depillagos">
@@ -1223,8 +1344,8 @@
             <div class="footer-col">
                 <h4>Serviços</h4>
                 <ul>
-                    <li><a href="depilacao-a-laser.html">Depilação a Laser</a></li>
                     <li><a href="servicos.html#depilacao-cera-feminina">Depilação a Cera</a></li>
+                    <li><a href="depilacao-a-laser.html">Depilação a Laser</a></li>
                     <li><a href="servicos.html#manicure-pedicure">Manicure e Pedicure</a></li>
                     <li><a href="servicos.html#cabelo">Cabelo</a></li>
                     <li><a href="servicos.html#estetica-facial">Estética</a></li>

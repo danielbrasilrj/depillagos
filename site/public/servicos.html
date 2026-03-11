@@ -40,10 +40,10 @@
     {
         "@context": "https://schema.org",
         "@type": "Service",
-        "serviceType": "Depilação a Laser",
+        "serviceType": "Depilação a Cera",
         "provider": { "@type": "BeautySalon", "name": "Depillagos", "url": "https://depillagos.com.br" },
         "areaServed": { "@type": "City", "name": "Araruama" },
-        "offers": { "@type": "AggregateOffer", "lowPrice": "59.90", "highPrice": "299", "priceCurrency": "BRL" }
+        "offers": { "@type": "AggregateOffer", "lowPrice": "20", "highPrice": "92", "priceCurrency": "BRL" }
     }
     </script>
 
@@ -51,10 +51,10 @@
     {
         "@context": "https://schema.org",
         "@type": "Service",
-        "serviceType": "Depilação a Cera",
+        "serviceType": "Depilação a Laser",
         "provider": { "@type": "BeautySalon", "name": "Depillagos" },
         "areaServed": { "@type": "City", "name": "Araruama" },
-        "offers": { "@type": "AggregateOffer", "lowPrice": "20", "highPrice": "92", "priceCurrency": "BRL" }
+        "offers": { "@type": "AggregateOffer", "lowPrice": "59.90", "highPrice": "299", "priceCurrency": "BRL" }
     }
     </script>
 
@@ -171,7 +171,7 @@
             text-decoration: none;
         }
 
-        .nav-logo img { height: 36px; width: auto; }
+        .nav-logo img { height: 40px; width: auto; }
 
         .nav-links {
             display: flex;
@@ -349,22 +349,27 @@
         }
 
         .category-emoji {
-            width: 48px;
-            height: 48px;
-            background: var(--bg);
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--bg), var(--bg-dark));
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
             flex-shrink: 0;
+        }
+
+        .category-emoji img {
+            width: 34px;
+            height: 34px;
         }
 
         .category-header h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--text);
+            line-height: 1.2;
         }
 
         .category-header h2 small {
@@ -373,7 +378,7 @@
             font-size: 13px;
             font-weight: 400;
             color: var(--text-light);
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .category-note {
@@ -669,7 +674,7 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo"><img src="imagens/logo_clara.jpeg" alt="Depillagos" width="120" height="36"></a>
+            <a href="/" class="nav-logo"><img src="imagens/logo-depillagos.png" alt="Depillagos" height="40"></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="/">Home</a></li>
                 <li><a href="servicos.html" class="active">Serviços</a></li>
@@ -697,16 +702,15 @@
         <!-- Category Navigation -->
         <div class="category-nav" id="categoryNav">
             <div class="category-nav-inner">
-                <a href="#depilacao-laser">Laser</a>
                 <a href="#depilacao-cera-feminina">Cera Feminina</a>
                 <a href="#depilacao-cera-masculina">Cera Masculina</a>
                 <a href="#depilacao-linha">Linha</a>
+                <a href="#depilacao-laser">Laser</a>
                 <a href="#cabelo">Cabelo</a>
                 <a href="#manicure-pedicure">Unhas</a>
                 <a href="#design-sobrancelha">Sobrancelha</a>
                 <a href="#estetica-facial">Facial</a>
                 <a href="#estetica-corporal">Corporal</a>
-                <a href="#outros">Outros</a>
             </div>
         </div>
 
@@ -717,10 +721,86 @@
                 <p>Nenhum serviço encontrado. Tente outra busca ou <a href="https://wa.me/5522992354970?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20um%20servi%C3%A7o." target="_blank" rel="noopener" style="color:var(--primary);">pergunte pelo WhatsApp</a>.</p>
             </div>
 
+            <!-- Depilação Cera Feminina -->
+            <section class="category-section" id="depilacao-cera-feminina">
+                <div class="category-header">
+                    <div class="category-emoji"><img src="imagens/servicos/cera.png" alt="Cera"></div>
+                    <h2>Depilação a Cera Feminina<small>~20 serviços · Cera quente · Sem hora marcada</small></h2>
+                </div>
+                <table class="service-table">
+                    <tr class="service-promo"><td class="service-name">Promo 3 áreas (seg–qua, dinheiro) <span class="promo-badge">Promo</span></td><td class="service-price">R$129,90</td><td class="service-cta"></td></tr>
+                    <tr class="service-promo"><td class="service-name">Promo 3 áreas (qui–sáb) <span class="promo-badge">Promo</span></td><td class="service-price">R$139,90</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Virilha total com ânus</td><td class="service-price">R$82</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Virilha total</td><td class="service-price">R$68</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Axila</td><td class="service-price">R$30</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Meia perna</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Virilha comum</td><td class="service-price">R$40</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Buço</td><td class="service-price">R$20</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Sobrancelha (limpeza)</td><td class="service-price">R$39</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Perna inteira</td><td class="service-price">R$81</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Virilha cavada com ânus</td><td class="service-price">R$79</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Braço</td><td class="service-price">R$50</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Coxa</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Costas</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Nádegas</td><td class="service-price">R$42</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Meio braço</td><td class="service-price">R$38</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Ânus</td><td class="service-price">R$36</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Faixa</td><td class="service-price">R$23</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Nariz</td><td class="service-price">R$22</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Seios</td><td class="service-price">R$21</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Queixo</td><td class="service-price">R$20</td><td class="service-cta"></td></tr>
+                </table>
+            </section>
+
+            <!-- Depilação Cera Masculina -->
+            <section class="category-section" id="depilacao-cera-masculina">
+                <div class="category-header">
+                    <div class="category-emoji"><img src="imagens/servicos/cera.png" alt="Cera"></div>
+                    <h2>Depilação a Cera Masculina<small>~15 serviços · Atendimento discreto e profissional</small></h2>
+                </div>
+                <table class="service-table">
+                    <tr><td class="service-name">Virilha total com ânus</td><td class="service-price">R$92</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Tórax + abdomen</td><td class="service-price">R$89</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Perna inteira</td><td class="service-price">R$89</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Virilha total</td><td class="service-price">R$80</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Barba</td><td class="service-price">R$64</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Braço</td><td class="service-price">R$60</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Costas</td><td class="service-price">R$56</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Nádegas</td><td class="service-price">R$55</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Tórax</td><td class="service-price">R$52</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Virilha comum</td><td class="service-price">R$52</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Meia perna</td><td class="service-price">R$50</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Coxa</td><td class="service-price">R$49</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Abdomen</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Ânus</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Sobrancelha (limpeza)</td><td class="service-price">R$40</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Ombro</td><td class="service-price">R$38</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Axila</td><td class="service-price">R$35</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Faixa</td><td class="service-price">R$28</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Orelha</td><td class="service-price">R$28</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Bigode</td><td class="service-price">R$27</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Queixo</td><td class="service-price">R$27</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Nariz</td><td class="service-price">R$25</td><td class="service-cta"></td></tr>
+                </table>
+            </section>
+
+            <!-- Depilação na Linha -->
+            <section class="category-section" id="depilacao-linha">
+                <div class="category-header">
+                    <div class="category-emoji"><img src="imagens/servicos/cera.png" alt="Linha"></div>
+                    <h2>Depilação na Linha<small>3 serviços · Técnica com linha egípcia</small></h2>
+                </div>
+                <table class="service-table">
+                    <tr><td class="service-name">Faixa</td><td class="service-price">R$28</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Buço</td><td class="service-price">R$26</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Queixo</td><td class="service-price">R$26</td><td class="service-cta"></td></tr>
+                </table>
+            </section>
+
             <!-- Depilação a Laser -->
             <section class="category-section" id="depilacao-laser">
                 <div class="category-header">
-                    <div class="category-emoji">✨</div>
+                    <div class="category-emoji"><img src="imagens/servicos/laser.png" alt="Laser"></div>
                     <h2>Depilação a Laser<small>~30 serviços · Laser 4D alemão · Todos os fototipos</small></h2>
                 </div>
                 <div class="category-note">💡 Avaliação gratuita! Agende pelo WhatsApp. <a href="depilacao-a-laser.html" style="color:var(--primary);font-weight:600;">Saiba mais sobre o Laser 4D →</a></div>
@@ -760,95 +840,23 @@
                 </table>
             </section>
 
-            <!-- Depilação Cera Feminina -->
-            <section class="category-section" id="depilacao-cera-feminina">
-                <div class="category-header">
-                    <div class="category-emoji">🌸</div>
-                    <h2>Depilação a Cera Feminina<small>~20 serviços · Cera quente · Sem hora marcada</small></h2>
-                </div>
-                <table class="service-table">
-                    <tr class="service-promo"><td class="service-name">Promo 3 áreas (seg–qua, dinheiro) <span class="promo-badge">Promo</span></td><td class="service-price">R$129,90</td><td class="service-cta"></td></tr>
-                    <tr class="service-promo"><td class="service-name">Promo 3 áreas (qui–sáb) <span class="promo-badge">Promo</span></td><td class="service-price">R$139,90</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Virilha total com ânus</td><td class="service-price">R$82</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Virilha cavada com ânus</td><td class="service-price">R$79</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Perna inteira</td><td class="service-price">R$81</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Virilha total</td><td class="service-price">R$68</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Braço</td><td class="service-price">R$50</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Meia perna</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Coxa</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Costas</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Nádegas</td><td class="service-price">R$42</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Virilha comum</td><td class="service-price">R$40</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Sobrancelha (limpeza)</td><td class="service-price">R$39</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Meio braço</td><td class="service-price">R$38</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Ânus</td><td class="service-price">R$36</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Axila</td><td class="service-price">R$30</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Faixa</td><td class="service-price">R$23</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Nariz</td><td class="service-price">R$22</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Seios</td><td class="service-price">R$21</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Buço</td><td class="service-price">R$20</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Queixo</td><td class="service-price">R$20</td><td class="service-cta"></td></tr>
-                </table>
-            </section>
-
-            <!-- Depilação Cera Masculina -->
-            <section class="category-section" id="depilacao-cera-masculina">
-                <div class="category-header">
-                    <div class="category-emoji">💪</div>
-                    <h2>Depilação a Cera Masculina<small>~15 serviços · Atendimento discreto e profissional</small></h2>
-                </div>
-                <table class="service-table">
-                    <tr><td class="service-name">Virilha total com ânus</td><td class="service-price">R$92</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Tórax + abdomen</td><td class="service-price">R$89</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Perna inteira</td><td class="service-price">R$89</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Virilha total</td><td class="service-price">R$80</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Barba</td><td class="service-price">R$64</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Braço</td><td class="service-price">R$60</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Costas</td><td class="service-price">R$56</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Nádegas</td><td class="service-price">R$55</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Tórax</td><td class="service-price">R$52</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Virilha comum</td><td class="service-price">R$52</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Meia perna</td><td class="service-price">R$50</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Coxa</td><td class="service-price">R$49</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Abdomen</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Ânus</td><td class="service-price">R$45</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Sobrancelha (limpeza)</td><td class="service-price">R$40</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Ombro</td><td class="service-price">R$38</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Axila</td><td class="service-price">R$35</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Faixa</td><td class="service-price">R$28</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Orelha</td><td class="service-price">R$28</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Bigode</td><td class="service-price">R$27</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Queixo</td><td class="service-price">R$27</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Nariz</td><td class="service-price">R$25</td><td class="service-cta"></td></tr>
-                </table>
-            </section>
-
-            <!-- Depilação na Linha -->
-            <section class="category-section" id="depilacao-linha">
-                <div class="category-header">
-                    <div class="category-emoji">🧵</div>
-                    <h2>Depilação na Linha<small>3 serviços · Técnica com linha egípcia</small></h2>
-                </div>
-                <table class="service-table">
-                    <tr><td class="service-name">Faixa</td><td class="service-price">R$28</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Buço</td><td class="service-price">R$26</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Queixo</td><td class="service-price">R$26</td><td class="service-cta"></td></tr>
-                </table>
-            </section>
-
             <!-- Cabelo -->
             <section class="category-section" id="cabelo">
                 <div class="category-header">
-                    <div class="category-emoji">💇</div>
+                    <div class="category-emoji"><img src="imagens/servicos/cabeleireiro.png" alt="Cabelo"></div>
                     <h2>Cabelo<small>~18 serviços · L'Oréal, Wella, Truss, Alfaparf, Aneethun</small></h2>
                 </div>
                 <div class="category-note">📅 Cabelo funciona de terça a sábado (não abre segunda).</div>
                 <table class="service-table">
+                    <tr><td class="service-name">Escova</td><td class="service-price">R$63</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Corte</td><td class="service-price">R$79</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Aplicação de tinta</td><td class="service-price">R$73</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Prancha</td><td class="service-price">R$33</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Coloração</td><td class="service-price">R$155</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Maquiagem</td><td class="service-price">R$199</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Tratamento Wella</td><td class="service-price">R$189,90</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Cauterização (Aneethun Kera)</td><td class="service-price">R$159,90</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Tratamento Truss</td><td class="service-price">R$159,90</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Coloração</td><td class="service-price">R$155</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Tratamento L'Oréal (c/ escova)</td><td class="service-price">R$150</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Tratamento Alfaparf</td><td class="service-price">R$150</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Tratamento Aneethun</td><td class="service-price">R$130</td><td class="service-cta"></td></tr>
@@ -856,15 +864,11 @@
                     <tr><td class="service-name">Matização</td><td class="service-price">R$129,90</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Plástica capilar (Aneethun Age)</td><td class="service-price">R$119</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Corte estilizado</td><td class="service-price">R$105</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Corte</td><td class="service-price">R$79</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Aplicação de tinta</td><td class="service-price">R$73</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Escova</td><td class="service-price">R$63</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Detox capilar (Aneethun Detox)</td><td class="service-price">R$59</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Hidratação (Aneethun Linha A)</td><td class="service-price">R$59</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Alinhamento capilar (Aneethun Liss)</td><td class="service-price">R$55</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Lavar e secar</td><td class="service-price">R$40</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Baby liss</td><td class="service-price">R$38</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Prancha</td><td class="service-price">R$33</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Botox capilar</td><td class="service-price">Sob consulta</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Escova progressiva</td><td class="service-price">Sob consulta</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Reflexo / Luzes</td><td class="service-price">Sob consulta</td><td class="service-cta"></td></tr>
@@ -874,19 +878,23 @@
             <!-- Manicure e Pedicure -->
             <section class="category-section" id="manicure-pedicure">
                 <div class="category-header">
-                    <div class="category-emoji">💅</div>
+                    <div class="category-emoji"><img src="imagens/servicos/manicure.png" alt="Manicure"></div>
                     <h2>Manicure e Pedicure<small>~25 serviços · Esmaltação, unhas postiças, SPA do pé</small></h2>
                 </div>
                 <table class="service-table">
+                    <tr><td class="service-name">Pé e mão</td><td class="service-price">R$65</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Manicure</td><td class="service-price">R$30</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Pedicure</td><td class="service-price">R$35</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Pedicure francesinha</td><td class="service-price">R$38</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Banho de gel (mão inclusa)</td><td class="service-price">R$99</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">SPA do pé (calosidade)</td><td class="service-price">R$85</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Manicure francesinha</td><td class="service-price">R$33</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Manicure permanente</td><td class="service-price">R$72</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Pedicure permanente</td><td class="service-price">R$75</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Fibra de vidro</td><td class="service-price">R$179</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Acrigel</td><td class="service-price">R$162</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Banho de gel (mão inclusa)</td><td class="service-price">R$99</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Fibra de vidro (manutenção)</td><td class="service-price">R$99</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Acrigel (manutenção)</td><td class="service-price">R$89</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">SPA do pé (calosidade)</td><td class="service-price">R$85</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Pedicure permanente</td><td class="service-price">R$75</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Manicure permanente</td><td class="service-price">R$72</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Pé e mão</td><td class="service-price">R$65</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Unha postiça (avulsa)</td><td class="service-price">R$65</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Unha aplicável avulsa</td><td class="service-price">R$65</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Unha postiça mão</td><td class="service-price">R$62</td><td class="service-cta"></td></tr>
@@ -895,11 +903,7 @@
                     <tr><td class="service-name">SPA do pé (c/ 10min massagem)</td><td class="service-price">R$50</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Acrigel (retirada)</td><td class="service-price">R$48</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Fibra de vidro (retirada)</td><td class="service-price">R$47</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Pedicure francesinha</td><td class="service-price">R$38</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Unha postiça (retirada)</td><td class="service-price">R$37</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Pedicure</td><td class="service-price">R$35</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Manicure francesinha</td><td class="service-price">R$33</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Manicure</td><td class="service-price">R$30</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Massagem relaxante 20min</td><td class="service-price">R$30</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Unha encapsulada avulsa</td><td class="service-price">R$21</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Pedicure express</td><td class="service-price">R$20</td><td class="service-cta"></td></tr>
@@ -911,13 +915,13 @@
             <!-- Design de Sobrancelha -->
             <section class="category-section" id="design-sobrancelha">
                 <div class="category-header">
-                    <div class="category-emoji">👁️</div>
+                    <div class="category-emoji"><img src="imagens/servicos/sobrancelha.png" alt="Sobrancelha"></div>
                     <h2>Design de Sobrancelha<small>4 serviços · Design personalizado + henna</small></h2>
                 </div>
                 <table class="service-table">
-                    <tr><td class="service-name">Design com henna</td><td class="service-price">R$73</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Design sobrancelha</td><td class="service-price">R$56</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Sobrancelha linha (limpeza)</td><td class="service-price">R$42</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Design sobrancelha</td><td class="service-price">R$56</td><td class="service-cta"></td></tr>
+                    <tr><td class="service-name">Design com henna</td><td class="service-price">R$73</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Henna</td><td class="service-price">R$34</td><td class="service-cta"></td></tr>
                 </table>
             </section>
@@ -925,7 +929,7 @@
             <!-- Estética Facial -->
             <section class="category-section" id="estetica-facial">
                 <div class="category-header">
-                    <div class="category-emoji">🧖</div>
+                    <div class="category-emoji"><img src="imagens/servicos/facial.png" alt="Facial"></div>
                     <h2>Estética Facial<small>4 serviços · Limpeza de pele, peeling, cílios</small></h2>
                 </div>
                 <table class="service-table">
@@ -939,7 +943,7 @@
             <!-- Estética Corporal -->
             <section class="category-section" id="estetica-corporal">
                 <div class="category-header">
-                    <div class="category-emoji">💆</div>
+                    <div class="category-emoji"><img src="imagens/servicos/corporal.png" alt="Corporal"></div>
                     <h2>Estética Corporal<small>5 serviços · Massagem, drenagem, esfoliação</small></h2>
                 </div>
                 <table class="service-table">
@@ -948,19 +952,6 @@
                     <tr><td class="service-name">Esfoliação corporal + banho de lua</td><td class="service-price">R$99</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Massagem relaxante</td><td class="service-price">R$99</td><td class="service-cta"></td></tr>
                     <tr><td class="service-name">Esfoliação corporal</td><td class="service-price">R$79</td><td class="service-cta"></td></tr>
-                </table>
-            </section>
-
-            <!-- Outros -->
-            <section class="category-section" id="outros">
-                <div class="category-header">
-                    <div class="category-emoji">⭐</div>
-                    <h2>Outros Serviços<small>Micropigmentação e experiências especiais</small></h2>
-                </div>
-                <table class="service-table">
-                    <tr><td class="service-name">Micropigmentação</td><td class="service-price">R$450</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Micro manutenção</td><td class="service-price">R$150</td><td class="service-cta"></td></tr>
-                    <tr><td class="service-name">Experiência única</td><td class="service-price">R$89</td><td class="service-cta"></td></tr>
                 </table>
             </section>
 
@@ -991,7 +982,7 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
-                <img src="imagens/logo_escura.jpeg" alt="Depillagos" class="footer-logo" width="100" height="32">
+                <img src="imagens/logo-depillagos-branca.png" alt="Depillagos" class="footer-logo" height="36">
                 <p>Centro de estética em Araruama desde 2008. A beleza vem em todas as formas, tamanhos e cores.</p>
                 <div class="footer-social">
                     <a href="https://www.instagram.com/_depillagos" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
@@ -1002,8 +993,8 @@
             <div class="footer-col">
                 <h4>Serviços</h4>
                 <ul>
-                    <li><a href="depilacao-a-laser.html">Depilação a Laser</a></li>
                     <li><a href="servicos.html#depilacao-cera-feminina">Depilação a Cera</a></li>
+                    <li><a href="depilacao-a-laser.html">Depilação a Laser</a></li>
                     <li><a href="servicos.html#manicure-pedicure">Manicure e Pedicure</a></li>
                     <li><a href="servicos.html#cabelo">Cabelo</a></li>
                     <li><a href="servicos.html#estetica-facial">Estética</a></li>
