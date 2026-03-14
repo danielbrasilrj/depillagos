@@ -55,9 +55,9 @@ Análise jurídica e contraproposta do contrato de locação do imóvel da matri
 ### Controle financeiro (`controle_financeiro/`)
 Cruzamento do quadro financeiro mensal (Miro) com dados do Trinks e Avec. Corte semanal aos sábados.
 
-### Câmeras de monitoramento (`cameras_monitoramento/`)
+### Monitoramento (`depillagos-monitor/`, repo separado)
 Monitoramento inteligente com contagem de clientes via IA e reconhecimento facial. Câmeras PoE + Mini PC local + Oracle Cloud.
-- Detalhes em `cameras_monitoramento/CLAUDE.md`
+- Path: `/Users/danielcarmo/Env/Projects/personal/depillagos-monitor`
 
 ### Depillagos Hair (`depillagos_hair/`)
 Landing page estática do setor de cabeleireiro. Tema sazonal, campanha Mês da Mulher (mar/2026). Vercel + Hostinger.

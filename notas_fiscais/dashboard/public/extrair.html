@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depillagos — Planilha Cota Parte MEI</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #9ca3af;
+    --accent: #a78bfa;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --blue: #60a5fa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 1.6rem; font-weight: 700; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .back { font-size: 1.2rem; color: var(--muted); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-title { font-size: 1rem; font-weight: 600; color: var(--accent); margin-bottom: 1rem; }
+
+  label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.25rem; }
+  .form-row { margin-bottom: 1rem; }
+  .select-input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    flex: 1;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  .select-input:focus { outline: 2px solid var(--accent); }
+  input[type="file"], input[type="password"] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  input[type="file"] { padding: 0.5rem; }
+  input:focus { outline: 2px solid var(--accent); }
+
+  .btn-extract {
+    background: var(--green);
+    color: #0f1117;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: opacity 0.2s;
+  }
+  .btn-extract:hover { opacity: 0.9; }
+  .btn-extract:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .status {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .spinner {
+    display: inline-block;
+    width: 24px; height: 24px;
+    border: 3px solid var(--border);
+    border-top-color: var(--green);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .kpi-main {
+    background: linear-gradient(135deg, #1e1b4b, #1a1d27);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .kpi-main .label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .kpi-main .value { font-size: 3rem; font-weight: 800; color: var(--accent); margin: 0.5rem 0; }
+  .kpi-main .sub { font-size: 0.9rem; color: var(--muted); }
+
+  .result {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .result-stat { text-align: center; }
+  .result-stat .val { font-size: 1.3rem; font-weight: 700; }
+  .result-stat .lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+
+  @media (max-width: 600px) {
+    .kpi-main .value { font-size: 2.2rem; }
+    .result-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .btn-download {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+  }
+  .btn-download:hover { opacity: 0.9; }
+
+  .error { color: var(--red); padding: 1rem; text-align: center; }
+  .warning { color: var(--yellow); font-size: 0.8rem; margin-top: 0.5rem; }
+
+  .footer { color: var(--muted); font-size: 0.75rem; text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="back">&larr;</a>
+  <h1>Planilha Cota Parte MEI</h1>
+</div>
+
+<div class="card">
+  <div class="card-title">Extrair notas com rateio de profissionais parceiros</div>
+  <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1.5rem">
+    Conecta na API da prefeitura (ADN) com o certificado digital A1 e gera um CSV com as notas que têm cota parte entre o salão e profissionais MEI.
+  </p>
+
+  <div class="form-row">
+    <label for="pfxFile">Certificado digital (.pfx)</label>
+    <input type="file" id="pfxFile" accept=".pfx,.p12">
+  </div>
+
+  <div class="form-row">
+    <label for="pfxSenha">Senha do certificado</label>
+    <input type="password" id="pfxSenha" placeholder="Senha do .pfx">
+  </div>
+
+  <div class="form-row">
+    <label>Período</label>
+    <div style="display:flex;gap:0.5rem">
+      <select id="periodoMes" class="select-input">
+        <option value="01">Janeiro</option>
+        <option value="02">Fevereiro</option>
+        <option value="03">Março</option>
+        <option value="04">Abril</option>
+        <option value="05">Maio</option>
+        <option value="06">Junho</option>
+        <option value="07">Julho</option>
+        <option value="08">Agosto</option>
+        <option value="09">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+      </select>
+      <select id="periodoAno" class="select-input"></select>
+    </div>
+  </div>
+
+  <button class="btn-extract" id="btnExtrair" onclick="extrair()">Extrair Notas</button>
+</div>
+
+<div id="output"></div>
+
+<div class="footer">
+  Fonte: API NFS-e Nacional (ADN) via mTLS &middot; Certificado digital A1 ICP-Brasil
+  <br><a href="/">Voltar ao início</a>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const fmt = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+// Default period: current month
+const now = new Date();
+const anoAtual = now.getFullYear();
+const anoSelect = $('#periodoAno');
+for (let y = anoAtual; y <= anoAtual + 1; y++) {
+  const opt = document.createElement('option');
+  opt.value = y;
+  opt.textContent = y;
+  anoSelect.appendChild(opt);
+}
+$('#periodoMes').value = String(now.getMonth() + 1).padStart(2, '0');
+anoSelect.value = String(anoAtual);
+
+function getPeriodo() {
+  return `${$('#periodoAno').value}-${$('#periodoMes').value}`;
+}
+
+async function extrair() {
+  const fileInput = $('#pfxFile');
+  const senha = $('#pfxSenha').value;
+  const periodo = getPeriodo();
+
+  if (!fileInput.files.length) {
+    $('#output').innerHTML = '<div class="error">Selecione o arquivo .pfx</div>';
+    return;
+  }
+  if (!senha) {
+    $('#output').innerHTML = '<div class="error">Informe a senha do certificado</div>';
+    return;
+  }
+
+  const btn = $('#btnExtrair');
+  btn.disabled = true;
+  btn.textContent = 'Extraindo...';
+
+  // Read file as base64
+  const file = fileInput.files[0];
+  const arrayBuffer = await file.arrayBuffer();
+  const bytes = new Uint8Array(arrayBuffer);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  const pfxBase64 = btoa(binary);
+
+  // Chunked extraction: multiple calls until done
+  const allNotas = [];
+  let startNsu = 1;
+  let totalDocs = 0;
+  let totalFailed = 0;
+  let chunk = 0;
+
+  try {
+    while (true) {
+      chunk++;
+      $('#output').innerHTML = `
+        <div class="status">
+          <span class="spinner"></span>
+          Baixando notas da prefeitura... etapa ${chunk}, ${totalDocs} docs processados
+        </div>`;
+
+      const res = await fetch('/api/extrair', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pfx: pfxBase64, senha, periodo, startNsu }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+        throw new Error(err.error || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      totalDocs += data.totalDocs;
+      totalFailed += data.failedNsus || 0;
+      allNotas.push(...data.notas);
+
+      if (data.done) break;
+      startNsu = data.nextNsu;
+    }
+
+    renderResult(allNotas, periodo, totalDocs, totalFailed);
+  } catch (err) {
+    $('#output').innerHTML = `<div class="error">Erro: ${err.message}<br><br><button class="btn-extract" onclick="extrair()" style="width:auto;padding:0.5rem 1.5rem">Tentar novamente</button></div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Extrair Notas';
+  }
+}
+
+function formatCnpj(c) {
+  c = c.padStart(14, '0');
+  return `${c.slice(0,2)}.${c.slice(2,5)}.${c.slice(5,8)}/${c.slice(8,12)}-${c.slice(12)}`;
+}
+
+function formatDateBR(iso) {
+  if (!iso || iso.length < 10) return iso || '';
+  const [y, m, d] = iso.slice(0, 10).split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function formatValorBR(v) {
+  return v.toFixed(2).replace('.', ',');
+}
+
+function renderResult(allNotas, periodo, totalDocs, totalFailed) {
+  // Filter by period and authorized
+  const notasPeriodo = allNotas.filter(n => n.dCompet.startsWith(periodo) && n.cStat === '100');
+  const comRateio = notasPeriodo.filter(n => n.temRateio);
+  const semRateio = notasPeriodo.filter(n => !n.temRateio);
+
+  // Build CSV lines
+  const csvLines = [];
+  for (const nota of comRateio) {
+    for (const [cnpj, dados] of Object.entries(nota.parceiros)) {
+      csvLines.push({
+        dataServico: formatDateBR(nota.dCompet),
+        dataEmissao: formatDateBR(nota.dhProc),
+        numero: nota.nfse,
+        cnpj: formatCnpj(cnpj),
+        cotaSalao: formatValorBR(dados.cota_salao),
+        cotaParceiro: formatValorBR(dados.cota_parceiro),
+      });
+    }
+  }
+  csvLines.sort((a, b) => a.numero.localeCompare(b.numero, undefined, { numeric: true }));
+
+  const header = 'data servico;data emissao;NUMERO DA NOTA;CNPJ PROFISSIONAL PARCEIRO;COTA PARTE SALÃO PARCEIRO;COTA PARTE PROFISSIONAL-PARCEIRO';
+  const rows = csvLines.map(r => `${r.dataServico};${r.dataEmissao};${r.numero};${r.cnpj};${r.cotaSalao};${r.cotaParceiro}`);
+  const csv = [header, ...rows].join('\n');
+
+  const totalValor = notasPeriodo.reduce((s, n) => s + n.vServ, 0);
+  const valorRateio = comRateio.reduce((s, n) => s + n.vServ, 0);
+
+  $('#output').innerHTML = `
+    <div class="kpi-main">
+      <div class="label">Total NFS-e emitidas pela Trinks</div>
+      <div class="value">${fmt(totalValor)}</div>
+      <div class="sub">${notasPeriodo.length} notas no período</div>
+    </div>
+    <div class="result">
+      <div class="result-grid">
+        <div class="result-stat">
+          <div class="val" style="color:var(--green)">${comRateio.length}</div>
+          <div class="lbl">Com rateio MEI</div>
+          <div class="sub" style="font-size:0.75rem;color:var(--muted)">Notas com divisão salão/parceiro</div>
+        </div>
+        <div class="result-stat">
+          <div class="val">${fmt(valorRateio)}</div>
+          <div class="lbl">Valor com rateio</div>
+          <div class="sub" style="font-size:0.75rem;color:var(--muted)">Soma das notas com cota parte</div>
+        </div>
+        <div class="result-stat">
+          <div class="val">${semRateio.length}</div>
+          <div class="lbl">Sem rateio</div>
+          <div class="sub" style="font-size:0.75rem;color:var(--muted)">Notas 100% do salão (sem MEI)</div>
+        </div>
+        <div class="result-stat">
+          <div class="val">${csvLines.length}</div>
+          <div class="lbl">Linhas no CSV</div>
+          <div class="sub" style="font-size:0.75rem;color:var(--muted)">Registros no arquivo pro contador</div>
+        </div>
+      </div>
+      ${totalFailed > 0 ? `<div class="warning" style="margin-bottom:1rem">Algumas requisições falharam (${totalFailed}). O resultado pode estar incompleto. <a href="#" onclick="extrair();return false" style="color:var(--yellow);text-decoration:underline">Gerar novamente</a></div>` : ''}
+      <button class="btn-download" onclick="downloadCsv()">Baixar CSV</button>
+    </div>`;
+
+  window._csvData = csv;
+  window._csvPeriodo = periodo;
+}
+
+function downloadCsv() {
+  if (!window._csvData) return;
+  const blob = new Blob([window._csvData], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const p = window._csvPeriodo.replace('-', '');
+  a.href = url;
+  a.download = `notas_rateio_${p}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

@@ -2,8 +2,11 @@
   "buildCommand": "",
   "outputDirectory": "public",
   "functions": {
-    "api/*.js": {
+    "api/nfse.js": {
       "maxDuration": 30
+    },
+    "api/extrair.js": {
+      "maxDuration": 60
     }
   },
   "rewrites": [
