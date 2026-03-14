@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depillagos — NFS-e do Mês</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #9ca3af;
+    --accent: #a78bfa;
+    --green: #34d399;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --blue: #60a5fa;
+    --pink: #f472b6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 1.6rem; font-weight: 700; }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .header-left { display: flex; align-items: center; gap: 0.75rem; }
+  .month-select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .month-select:focus { outline: 2px solid var(--accent); }
+
+  /* Main KPI */
+  .kpi-main {
+    background: linear-gradient(135deg, #1e1b4b, #1a1d27);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .kpi-main .label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .kpi-main .value { font-size: 3rem; font-weight: 800; color: var(--accent); margin: 0.5rem 0; }
+  .kpi-main .sub { font-size: 0.9rem; color: var(--muted); }
+
+  /* Secondary KPIs */
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-card .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-card .value { font-size: 1.4rem; font-weight: 700; margin: 0.25rem 0; }
+  .stat-card .sub { font-size: 0.8rem; color: var(--muted); }
+
+  /* Table */
+  .section { margin-bottom: 2rem; }
+  .section-title { font-size: 1rem; font-weight: 600; color: var(--accent); margin-bottom: 0.75rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th.right, td.right { text-align: right; }
+  td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgba(42, 45, 58, 0.5);
+  }
+  tr:hover td { background: rgba(167, 139, 250, 0.05); }
+
+  /* Bar */
+  .bar-container { display: flex; flex-direction: column; gap: 0.5rem; }
+  .bar-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; }
+  .bar-label { width: 140px; text-align: right; color: var(--muted); flex-shrink: 0; }
+  .bar-track { flex: 1; height: 20px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; background: var(--accent); display: flex; align-items: center; padding-left: 6px; font-size: 0.7rem; font-weight: 600; color: white; white-space: nowrap; }
+  .bar-value { width: 90px; text-align: right; font-weight: 600; flex-shrink: 0; }
+
+  /* Footer */
+  .footer { color: var(--muted); font-size: 0.75rem; text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+  /* Loading */
+  .loading { text-align: center; padding: 4rem; color: var(--muted); }
+  .loading .spinner {
+    display: inline-block;
+    width: 32px; height: 32px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error { text-align: center; padding: 2rem; color: var(--red); }
+
+  .badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .badge-yellow { background: rgba(251,191,36,0.15); color: var(--yellow); }
+
+  @media (max-width: 600px) {
+    body { padding: 1rem; }
+    .kpi-main .value { font-size: 2.2rem; }
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .bar-label { width: 100px; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Depillagos</h1>
+    <span style="color:var(--muted)">NFS-e do Mês</span>
+  </div>
+  <input type="month" id="monthPicker" class="month-select">
+</div>
+
+<div id="content">
+  <div class="loading">
+    <div class="spinner"></div>
+    <div>Carregando dados do Trinks...</div>
+  </div>
+</div>
+
+<div class="footer">
+  Fonte: Trinks API (transações com pagamento cartão/PIX) &middot; Precisão ~97,6% vs prefeitura
+  <br>Atualizado em tempo real &middot; Dinheiro não gera NFS-e
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const fmt = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const fmtNum = (v) => v.toLocaleString('pt-BR');
+const fmtDate = (iso) => {
+  const [y, m, d] = iso.split('-');
+  const dias = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const dt = new Date(Number(y), Number(m) - 1, Number(d));
+  return `${dias[dt.getDay()]} ${d}/${m}`;
+};
+
+function getCurrentPeriodo() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+}
+
+async function loadData(periodo) {
+  $('#content').innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>Carregando dados do Trinks...</div>
+    </div>`;
+
+  try {
+    const res = await fetch(`/api/nfse?periodo=${periodo}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    render(data);
+  } catch (err) {
+    $('#content').innerHTML = `<div class="error">Erro ao carregar: ${err.message}</div>`;
+  }
+}
+
+function render(data) {
+  const melhorDiaFmt = data.melhorDia.data !== '-' ? fmtDate(data.melhorDia.data) : '-';
+  const maxDiaValor = Math.max(...data.porDia.map(d => d.valor), 1);
+  const maxMetodoValor = Math.max(...data.porMetodo.map(m => m.valor), 1);
+
+  let html = `
+    <div class="kpi-main">
+      <div class="label">Total NFS-e emitidas</div>
+      <div class="value">${fmt(data.totalNfse)}</div>
+      <div class="sub">${fmtNum(data.countNfse)} notas em ${data.diasUteis} dias &middot; <span class="badge badge-yellow">Fonte: Trinks</span></div>
+    </div>
+
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="label">Média diária</div>
+        <div class="value">${fmt(data.mediaDiaria)}</div>
+        <div class="sub">${Math.round(data.countNfse / (data.diasUteis || 1))} notas/dia</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Melhor dia</div>
+        <div class="value">${fmt(data.melhorDia.valor)}</div>
+        <div class="sub">${melhorDiaFmt} &middot; ${data.melhorDia.notas} notas</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Total transações</div>
+        <div class="value">${fmtNum(data.countGeral)}</div>
+        <div class="sub">${fmt(data.totalGeral)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">% NFS-e / Total</div>
+        <div class="value">${data.countGeral > 0 ? Math.round(data.countNfse / data.countGeral * 100) : 0}%</div>
+        <div class="sub">${fmt(data.totalGeral - data.totalNfse)} em dinheiro</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Formas de pagamento (NFS-e)</div>
+      <div class="bar-container">
+        ${data.porMetodo.map(m => `
+          <div class="bar-row">
+            <div class="bar-label">${m.nome}</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width: ${Math.max((m.valor / maxMetodoValor) * 100, 8)}%">${Math.round(m.valor / data.totalNfse * 100)}%</div>
+            </div>
+            <div class="bar-value">${fmt(m.valor)}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Por dia</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th class="right">Notas</th>
+            <th class="right">Valor</th>
+            <th style="width:40%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.porDia.map(d => `
+            <tr>
+              <td>${fmtDate(d.data)}</td>
+              <td class="right">${d.notas}</td>
+              <td class="right">${fmt(d.valor)}</td>
+              <td>
+                <div style="height:12px;background:var(--border);border-radius:3px;overflow:hidden">
+                  <div style="height:100%;width:${(d.valor / maxDiaValor) * 100}%;background:var(--accent);border-radius:3px"></div>
+                </div>
+              </td>
+            </tr>`).join('')}
+        </tbody>
+        <tfoot>
+          <tr style="font-weight:700;border-top:2px solid var(--border)">
+            <td>Total</td>
+            <td class="right">${fmtNum(data.countNfse)}</td>
+            <td class="right">${fmt(data.totalNfse)}</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>`;
+
+  $('#content').innerHTML = html;
+}
+
+// Init
+const picker = $('#monthPicker');
+picker.value = getCurrentPeriodo();
+picker.addEventListener('change', () => loadData(picker.value));
+loadData(picker.value);
+</script>
+</body>
+</html>

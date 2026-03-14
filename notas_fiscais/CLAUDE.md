@@ -1,8 +1,11 @@
-# Projeto Depilagos - Extração de Notas Fiscais
+# Projeto Depilagos - Notas Fiscais
 
 ## Contexto
 
-Este projeto processa Notas Fiscais de Serviço Eletrônicas (NFS-e) emitidas pelo **CENTRO DE ESTETICA DEPILAGOS LTDA** (CNPJ: 09.223.558/0001-00), localizado em Araruama/RJ. O objetivo é extrair dados de notas que possuem **cota parte de profissional parceiro** (rateio) e gerar um CSV estruturado.
+Este projeto gerencia Notas Fiscais de Serviço Eletrônicas (NFS-e) do **CENTRO DE ESTETICA DEPILAGOS LTDA** (CNPJ: 09.223.558/0001-00), Araruama/RJ. Duas funções principais:
+
+1. **Dashboard NFS-e** — painel web que mostra o total de NFS-e emitidas no mês em tempo real
+2. **Extração mensal** — gera CSV com notas de cota parte (rateio MEI) para o contador
 
 ## O que é o rateio
 
@@ -11,20 +14,26 @@ A Depilagos trabalha com profissionais parceiros (MEIs com CNPJ próprio) que pr
 ## Estrutura do projeto
 
 ```
+├── dashboard/                 # Dashboard web NFS-e (Vercel)
+│   ├── api/
+│   │   └── nfse.js           # Serverless: busca Trinks, filtra cartão/PIX
+│   ├── public/
+│   │   └── index.html        # Frontend single-page (dark theme)
+│   ├── vercel.json
+│   └── package.json
 ├── scripts/
-│   └── extrair_notas.py      # Script principal de extração e verificação
+│   ├── extrair_notas.py      # Extração mensal via ADN (cota parte MEI)
+│   ├── conciliar_fev.py      # Conciliação NFS-e vs Trinks (fev/2026)
+│   └── conciliar.py          # Conciliação genérica (requer ADN online)
 ├── tests/
 │   ├── conftest.py           # Configura sys.path para imports
 │   ├── test_extrair_notas.py # Testes unitários (extração)
 │   └── test_resumo_notas.py  # Testes unitários (resumo, comparação, histórico)
 ├── certificado/              # Certificado digital A1 (.pfx) - NÃO commitado
 ├── docs/                     # PDFs de referência e documentos auxiliares
-│   ├── Notas (1).pdf
-│   ├── Notas (2).pdf
-│   └── Notas com deduções ABRIL 2024.xlsx
-├── output/                   # CSVs gerados pelo script
+├── output/                   # CSVs, resumos e JSONs gerados
 ├── REGRAS_EXTRACAO_NOTAS.md  # Regras de extração e padrões
-└── CLAUDE.md                 # Contexto técnico do projeto
+└── CLAUDE.md
 ```
 
 ## Método principal: API NFS-e Nacional (ADN)
@@ -144,6 +153,49 @@ O script automaticamente:
 4. **Com notas novas** → atualiza CSV e resumo, registra "Atualização: X → Y"
 
 **Recomendação:** após a extração mensal, rodar o mesmo comando 2-3 dias depois para capturar notas com delay.
+
+## Dashboard NFS-e
+
+**URL:** https://dashboard-topaz-ten-65.vercel.app
+**Diretório:** `dashboard/`
+**Deploy:** `cd dashboard && VERCEL_SCOPE=daniels-projects-548066da npx --yes vercel@latest deploy . --yes --prod`
+**Env vars (Vercel):** `TRINKS_API_KEY`
+
+### Funções do dashboard
+
+1. **Total NFS-e emitidas no mês** (KPI principal)
+   - Fonte: Trinks API (`/transacoes`), filtrado por cartão + PIX
+   - Precisão: ~97,6% vs prefeitura (validado fev/2026)
+   - Atualização: tempo real (cache 5 min no Vercel)
+   - Métricas: total, média diária, melhor dia, breakdown por forma de pagamento, tabela diária
+
+2. **Extração mensal cota parte MEI** (planilha pro contador) — *a implementar no dashboard*
+   - Hoje: `python3 scripts/extrair_notas.py --periodo YYYY-MM`
+   - Gera CSV com notas que têm rateio entre salão e profissional parceiro
+   - Futuro: integrar no dashboard para download direto
+
+### Lógica de emissão de NFS-e
+
+O objetivo é emitir no mínimo o valor rastreável pela Receita (maquininha + PIX).
+
+Quando a recepcionista pergunta "quanto de notas já foram emitidas este mês", quer saber o **total de NFS-e emitidas pelo Trinks**. O dashboard responde isso em tempo real.
+
+### Fontes de dados e precisão
+
+| Fonte | O que retorna                 | Precisão | Latência |
+|-------|-------------------------------|----------|----------|
+| **Trinks API** (dashboard) | Todas as transacoes          | ~97,6% | Tempo real |
+| **ADN/prefeitura** (script) | NFS-e autorizadas (cstat=100) | 100% | Delay 1-3 dias |
+
+A diferença de ~2,4% entre Trinks e ADN se deve a: notas emitidas em lote retroativo (competem pelo mesmo match), descontos no Trinks que alteram o valor vs NFS-e, e valores muito comuns (ex: R$ 35 pedicure) que geram ambiguidade.
+
+### Conciliação Trinks vs Prefeitura
+
+Match por **data + valor** (tolerância ±5 dias, ±R$ 0,02). Não é possível comparar por número de nota (Trinks não expõe). O endpoint `/transacoes/notas-fiscais` existe na documentação Trinks mas retorna 404 — confirmado via Swagger e testes diretos.
+
+**Resultado fev/2026:** 536/549 notas com rateio bateram (97,6%). 482 mesmo dia, 54 com shift. 13 sem match (lote retroativo ou divergência de desconto).
+
+Scripts: `scripts/conciliar_fev.py` | Resultado: `output/conciliacao_202602.json`
 
 ## Método legado: Extração de PDF
 

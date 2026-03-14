@@ -40,3 +40,11 @@ Full endpoint reference in `.claude/commands/trinks.md`.
 - **153 services** across 10 categories
 - **25 professionals**
 - Key endpoints: `/servicos`, `/agendamentos`, `/clientes`, `/profissionais`, `/transacoes`, `/vendas`, `/consumo`
+
+## NFS-e
+
+O Trinks é sistema de gestão (POS), **não fiscal**. A API não expõe dados de NFS-e (endpoint `/transacoes/notas-fiscais` documentado mas retorna 404). Toda documentação de NFS-e, conciliação e dashboard está em `notas_fiscais/CLAUDE.md`.
+
+## Docs
+
+- `autoatendimento.md` — Levantamento sobre o módulo de autoatendimento da Trinks (totem, pagamento via Stone, custos)
