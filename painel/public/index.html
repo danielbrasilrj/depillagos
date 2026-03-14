@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Depillagos — Painel Admin</title>
+  <title>Depillagos — Painel</title>
   <style>
     :root {
       --bg: #0f1117;
@@ -25,6 +25,8 @@
       --amber-glow: rgba(217, 119, 6, 0.15);
       --cyan: #0891b2;
       --cyan-glow: rgba(8, 145, 178, 0.15);
+      --red: #dc2626;
+      --red-glow: rgba(220, 38, 38, 0.15);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -34,12 +36,76 @@
       min-height: 100vh;
     }
 
+    /* Login */
+    .login-overlay {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .login-overlay.hidden { display: none; }
+    .login-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .login-box .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #c81773, #e065a8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .login-box .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 28px; }
+    .login-box input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+    .login-box input:focus { border-color: var(--pink); }
+    .login-box input::placeholder { color: var(--text-muted); }
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #c81773, #e065a8);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: opacity 0.2s;
+    }
+    .login-btn:hover { opacity: 0.9; }
+    .login-error {
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-top: 12px;
+      min-height: 1.2em;
+    }
+
     /* Header */
     header {
       padding: 40px 24px 32px;
       text-align: center;
       background: linear-gradient(180deg, rgba(200,23,115,0.08) 0%, transparent 100%);
       border-bottom: 1px solid var(--border);
+      position: relative;
     }
     .logo {
       font-size: 1.8rem;
@@ -50,8 +116,39 @@
       -webkit-text-fill-color: transparent;
     }
     header p { color: var(--text-muted); margin-top: 6px; font-size: 0.95rem; }
+    .header-user {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--pink-glow);
+      color: var(--pink);
+    }
+    .btn-logout {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover { border-color: var(--red); color: var(--red); }
 
     .container { max-width: 1000px; margin: 0 auto; padding: 32px 20px; }
+    .main-content { display: none; }
+    .main-content.visible { display: block; }
 
     /* Section */
     .section { margin-bottom: 36px; }
@@ -102,17 +199,8 @@
       flex-shrink: 0;
     }
     .card-body { flex: 1; min-width: 0; }
-    .card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      line-height: 1.3;
-    }
-    .card-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      line-height: 1.4;
-    }
+    .card-title { font-size: 0.95rem; font-weight: 600; line-height: 1.3; }
+    .card-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
     .card-badge {
       font-size: 0.65rem;
       font-weight: 700;
@@ -132,13 +220,9 @@
     .icon-blue { background: var(--blue-glow); color: var(--blue); }
     .icon-amber { background: var(--amber-glow); color: var(--amber); }
     .icon-cyan { background: var(--cyan-glow); color: var(--cyan); }
+    .icon-red { background: var(--red-glow); color: var(--red); }
 
-    /* External link arrow */
-    .card-arrow {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      transition: transform 0.2s;
-    }
+    .card-arrow { color: var(--text-muted); font-size: 0.9rem; transition: transform 0.2s; }
     .card:hover .card-arrow { transform: translateX(3px); }
 
     /* Footer */
@@ -150,30 +234,10 @@
       border-top: 1px solid var(--border);
     }
 
-    /* Quick stats */
-    .stats-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 32px;
-      overflow-x: auto;
-    }
-    .stat {
-      flex: 1;
-      min-width: 140px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-    }
-    .stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #c81773, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+    /* Role visibility */
+    .adm-only { display: none; }
+    body.role-adm .adm-only { display: block; }
+    body.role-adm .grid .adm-only { display: flex; }
 
     @media (max-width: 600px) {
       header { padding: 28px 16px 24px; }
@@ -183,238 +247,348 @@
       .stats-row { gap: 8px; }
       .stat { padding: 12px 8px; min-width: 100px; }
       .stat-value { font-size: 1.2rem; }
+      .header-user { top: 10px; right: 12px; }
+      .login-box { margin: 0 16px; padding: 32px 24px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">Depillagos</div>
-    <p>Painel administrativo</p>
-  </header>
-
-  <div class="container">
-    <!-- Quick stats -->
-    <div class="stats-row">
-      <div class="stat">
-        <div class="stat-value">26K+</div>
-        <div class="stat-label">Clientes</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">153</div>
-        <div class="stat-label">Serviços</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">25</div>
-        <div class="stat-label">Profissionais</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">2</div>
-        <div class="stat-label">Unidades</div>
-      </div>
-    </div>
-
-    <!-- Dashboards e ferramentas -->
-    <div class="section">
-      <div class="section-title">Dashboards &amp; Ferramentas</div>
-      <div class="grid">
-        <a class="card" href="https://dashboard-topaz-ten-65.vercel.app" target="_blank">
-          <div class="card-icon icon-green">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Dashboard NFS-e</div>
-            <div class="card-desc">Total de notas emitidas no mês em tempo real</div>
-          </div>
-          <span class="card-badge badge-live">Live</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://contadorinteligente.vercel.app" target="_blank">
-          <div class="card-icon icon-purple">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Contador Inteligente</div>
-            <div class="card-desc">Diagnóstico fiscal e cenários tributários</div>
-          </div>
-          <span class="card-badge badge-live">Live</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://camerasmonitoramento.vercel.app" target="_blank">
-          <div class="card-icon icon-cyan">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Monitor de Câmeras</div>
-            <div class="card-desc">Contagem de clientes via IA e reconhecimento</div>
-          </div>
-          <span class="card-badge badge-live">Live</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://pascoa-green.vercel.app" target="_blank">
-          <div class="card-icon icon-purple">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Páscoa 2026</div>
-            <div class="card-desc">Cadastro de presentes para clientes</div>
-          </div>
-          <span class="card-badge badge-live">Live</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Sites -->
-    <div class="section">
-      <div class="section-title">Sites</div>
-      <div class="grid">
-        <a class="card" href="https://depillagos.com.br" target="_blank">
-          <div class="card-icon icon-pink">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">depillagos.com.br</div>
-            <div class="card-desc">Site institucional</div>
-          </div>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://depillagoshair.vercel.app" target="_blank">
-          <div class="card-icon icon-pink">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Depillagos Hair</div>
-            <div class="card-desc">Landing page cabeleireiro — Mês da Mulher</div>
-          </div>
-          <span class="card-badge badge-live">Live</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://depillagos-site.vercel.app" target="_blank">
-          <div class="card-icon icon-amber">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Novo Site (staging)</div>
-            <div class="card-desc">Novo depillagos.com.br com preços do Trinks</div>
-          </div>
-          <span class="card-badge badge-dev">Staging</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Sistemas externos -->
-    <div class="section">
-      <div class="section-title">Sistemas &amp; Plataformas</div>
-      <div class="grid">
-        <a class="card" href="https://app.trinks.com" target="_blank">
-          <div class="card-icon icon-blue">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Trinks</div>
-            <div class="card-desc">Agenda, clientes, pagamentos e relatórios</div>
-          </div>
-          <span class="card-badge badge-ext">Externo</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://trinks.readme.io/reference/introducao" target="_blank">
-          <div class="card-icon icon-blue">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Trinks API Docs</div>
-            <div class="card-desc">Documentação da API REST</div>
-          </div>
-          <span class="card-badge badge-ext">Externo</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://adn.nfse.gov.br/contribuintes" target="_blank">
-          <div class="card-icon icon-green">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">ADN NFS-e Nacional</div>
-            <div class="card-desc">Portal de notas fiscais da Receita</div>
-          </div>
-          <span class="card-badge badge-ext">Externo</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://vercel.com/daniels-projects-548066da" target="_blank">
-          <div class="card-icon icon-cyan">
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 19.5h20L12 2z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Vercel Dashboard</div>
-            <div class="card-desc">Deploys, logs e domínios</div>
-          </div>
-          <span class="card-badge badge-ext">Externo</span>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Redes sociais -->
-    <div class="section">
-      <div class="section-title">Redes Sociais &amp; Contato</div>
-      <div class="grid">
-        <a class="card" href="https://wa.me/5522992354970" target="_blank">
-          <div class="card-icon icon-green">
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">WhatsApp</div>
-            <div class="card-desc">(22) 99235-4970</div>
-          </div>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://instagram.com/_depillagos" target="_blank">
-          <div class="card-icon icon-pink">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Instagram</div>
-            <div class="card-desc">@_depillagos</div>
-          </div>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://facebook.com/depillagosararuama" target="_blank">
-          <div class="card-icon icon-blue">
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Facebook</div>
-            <div class="card-desc">@depillagosararuama</div>
-          </div>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-
-        <a class="card" href="https://maps.google.com/?q=Depillagos+Araruama" target="_blank">
-          <div class="card-icon icon-amber">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          </div>
-          <div class="card-body">
-            <div class="card-title">Google Maps</div>
-            <div class="card-desc">Rua Francisco A. da Silva, 120 — Araruama</div>
-          </div>
-          <span class="card-arrow">&rarr;</span>
-        </a>
-      </div>
+  <!-- LOGIN -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <div class="logo">Depillagos</div>
+      <div class="subtitle">Painel administrativo</div>
+      <form onsubmit="return doLogin(event)">
+        <input type="text" id="loginUser" placeholder="Usuário" autocomplete="username" autofocus>
+        <input type="password" id="loginPass" placeholder="Senha" autocomplete="current-password">
+        <button type="submit" class="login-btn">Entrar</button>
+      </form>
+      <div class="login-error" id="loginError"></div>
     </div>
   </div>
 
-  <footer>
-    Depillagos &copy; 2008–2026 &middot; Centro de Estética &middot; Araruama/RJ
-  </footer>
+  <!-- MAIN -->
+  <div class="main-content" id="mainContent">
+    <header>
+      <div class="header-user">
+        <span class="user-badge" id="roleBadge"></span>
+        <button class="btn-logout" onclick="doLogout()">Sair</button>
+      </div>
+      <div class="logo">Depillagos</div>
+      <p>Painel administrativo</p>
+    </header>
+
+    <div class="container">
+      <!-- RECEPÇÃO -->
+      <div class="section">
+        <div class="section-title">Recepção</div>
+        <div class="grid">
+          <a class="card" href="https://dashboard-topaz-ten-65.vercel.app" target="_blank">
+            <div class="card-icon icon-green">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Dashboard NFS-e</div>
+              <div class="card-desc">Total de notas emitidas no mês em tempo real</div>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://pascoa-green.vercel.app" target="_blank">
+            <div class="card-icon icon-purple">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Páscoa 2026</div>
+              <div class="card-desc">Cadastro de presentes para clientes</div>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- DASHBOARDS (admin only) -->
+      <div class="section adm-only">
+        <div class="section-title">Dashboards &amp; Ferramentas</div>
+        <div class="grid">
+          <a class="card" href="https://contadorinteligente.vercel.app" target="_blank">
+            <div class="card-icon icon-purple">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Contador Inteligente</div>
+              <div class="card-desc">Diagnóstico fiscal e cenários tributários</div>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://camerasmonitoramento.vercel.app" target="_blank">
+            <div class="card-icon icon-cyan">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Monitor de Câmeras</div>
+              <div class="card-desc">Contagem de clientes via IA e reconhecimento</div>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- APP (admin only) -->
+      <div class="section adm-only">
+        <div class="section-title">App Depillagos</div>
+        <div class="grid">
+          <a class="card" href="https://depillagos-web.vercel.app" target="_blank">
+            <div class="card-icon icon-pink">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">App Web</div>
+              <div class="card-desc">Versão web do app — Expo export</div>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- SITES (admin only) -->
+      <div class="section adm-only">
+        <div class="section-title">Sites</div>
+        <div class="grid">
+          <a class="card" href="https://depillagos.com.br" target="_blank">
+            <div class="card-icon icon-pink">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">depillagos.com.br</div>
+              <div class="card-desc">Site institucional</div>
+            </div>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://depillagoshair.vercel.app" target="_blank">
+            <div class="card-icon icon-pink">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Depillagos Hair</div>
+              <div class="card-desc">Landing page cabeleireiro</div>
+            </div>
+            <span class="card-badge badge-live">Live</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://depillagos-site.vercel.app" target="_blank">
+            <div class="card-icon icon-amber">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Novo Site (staging)</div>
+              <div class="card-desc">Novo depillagos.com.br com preços do Trinks</div>
+            </div>
+            <span class="card-badge badge-dev">Staging</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- TECH STACK (admin only) -->
+      <div class="section adm-only">
+        <div class="section-title">Tech Stack &amp; Serviços</div>
+        <div class="grid">
+          <a class="card" href="https://depillagosappv2-production.up.railway.app/health" target="_blank">
+            <div class="card-icon icon-purple">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Railway</div>
+              <div class="card-desc">App API, PostgreSQL</div>
+            </div>
+            <span class="card-badge badge-ext">Hosting</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://vercel.com/daniels-projects-548066da" target="_blank">
+            <div class="card-icon icon-cyan">
+              <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 19.5h20L12 2z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Vercel</div>
+              <div class="card-desc">App Web, NFS-e, Contador, Hair, Novo Site, Páscoa, Monitor, Painel</div>
+            </div>
+            <span class="card-badge badge-ext">Hosting</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://expo.dev/projects/75ffd237-a7b8-4922-891f-37d11df8a0e7" target="_blank">
+            <div class="card-icon icon-blue">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Expo</div>
+              <div class="card-desc">App Mobile (iOS, Android, Web)</div>
+            </div>
+            <span class="card-badge badge-ext">Mobile</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://console.twilio.com" target="_blank">
+            <div class="card-icon icon-red">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Twilio</div>
+              <div class="card-desc">App (login OTP por SMS)</div>
+            </div>
+            <span class="card-badge badge-ext">Auth</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://sentry.io" target="_blank">
+            <div class="card-icon icon-amber">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Sentry</div>
+              <div class="card-desc">App API, App Mobile</div>
+            </div>
+            <span class="card-badge badge-ext">Monitoring</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://mixpanel.com" target="_blank">
+            <div class="card-icon icon-pink">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Mixpanel</div>
+              <div class="card-desc">App Mobile</div>
+            </div>
+            <span class="card-badge badge-ext">Analytics</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://fish.audio" target="_blank">
+            <div class="card-icon icon-cyan">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Fish Audio</div>
+              <div class="card-desc">App (áudio TTS para push notifications)</div>
+            </div>
+            <span class="card-badge badge-ext">AI</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://console.anthropic.com" target="_blank">
+            <div class="card-icon icon-amber">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Claude API (Anthropic)</div>
+              <div class="card-desc">App (smart push IA), Monitor</div>
+            </div>
+            <span class="card-badge badge-ext">AI</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://upstash.com" target="_blank">
+            <div class="card-icon icon-green">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Upstash Redis</div>
+              <div class="card-desc">Páscoa</div>
+            </div>
+            <span class="card-badge badge-ext">Database</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://app.trinks.com" target="_blank">
+            <div class="card-icon icon-blue">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Trinks</div>
+              <div class="card-desc">App, NFS-e, Novo Site, Páscoa, Notas Fiscais</div>
+            </div>
+            <span class="card-badge badge-ext">POS</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+
+          <a class="card" href="https://hostinger.com.br" target="_blank">
+            <div class="card-icon icon-purple">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Hostinger</div>
+              <div class="card-desc">depillagos.com.br, Hair</div>
+            </div>
+            <span class="card-badge badge-ext">Hosting</span>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Depillagos &copy; 2008–2026 &middot; Centro de Estética &middot; Araruama/RJ
+    </footer>
+  </div>
+
+  <script>
+    const USERS = {
+      admin: { pass: 'depillagos2026', role: 'adm' },
+      recepcao: { pass: 'recepcao2026', role: 'recepcao' },
+    };
+
+    function doLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('loginUser').value.trim().toLowerCase();
+      const pass = document.getElementById('loginPass').value;
+      const entry = USERS[user];
+
+      if (!entry || entry.pass !== pass) {
+        document.getElementById('loginError').textContent = 'Usuário ou senha incorretos';
+        return false;
+      }
+
+      sessionStorage.setItem('depillagos_role', entry.role);
+      sessionStorage.setItem('depillagos_user', user);
+      applyLogin(entry.role, user);
+      return false;
+    }
+
+    function applyLogin(role, user) {
+      document.getElementById('loginOverlay').classList.add('hidden');
+      document.getElementById('mainContent').classList.add('visible');
+      document.body.className = 'role-' + role;
+      document.getElementById('roleBadge').textContent = role === 'adm' ? 'Admin' : 'Recepção';
+    }
+
+    function doLogout() {
+      sessionStorage.removeItem('depillagos_role');
+      sessionStorage.removeItem('depillagos_user');
+      document.getElementById('loginOverlay').classList.remove('hidden');
+      document.getElementById('mainContent').classList.remove('visible');
+      document.body.className = '';
+      document.getElementById('loginUser').value = '';
+      document.getElementById('loginPass').value = '';
+      document.getElementById('loginError').textContent = '';
+    }
+
+    // Auto-login from session
+    (function() {
+      const role = sessionStorage.getItem('depillagos_role');
+      const user = sessionStorage.getItem('depillagos_user');
+      if (role && user) applyLogin(role, user);
+    })();
+  </script>
 </body>
 </html>
